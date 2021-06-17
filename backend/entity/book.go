@@ -1,14 +1,20 @@
 package entity
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Books struct {
-	BookID    int       `gorm:"primaryKey" json:"book_id"`
-	Title     string    `json:"title"`
-	UrlFile   string    `json:"url_file"`
-	UrlVideo  string    `json:"url_video"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID         int            `gorm:"primaryKey" json:"id"`
+	Title      string         `json:"title"`
+	UrlFile    string         `json:"url_file"`
+	UrlVideo   string         `json:"url_video"`
+	CategoryID int            `json:"category_id"`
+	CreatedAt  time.Time      `json:"created_at"`
+	UpdatedAt  time.Time      `json:"updated_at"`
+	Deleted    gorm.DeletedAt `json:"-"`
 }
 
 type BookDetail struct {
@@ -17,5 +23,6 @@ type BookDetail struct {
 }
 
 type BookInput struct {
-	Title string `json:"title" binding:"required"`
+	Title      string `json:"title" binding:"required"`
+	CategoryID int    `json:"category_id" binding:"required"`
 }

@@ -54,8 +54,8 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 		return BookFormat{}, err
 	}
 
-	if book.BookID == 0 {
-		newError := fmt.Sprintf("Book id %d not found", book.BookID)
+	if book.ID == 0 {
+		newError := fmt.Sprintf("Book id %s not found", bookID)
 
 		return BookFormat{}, errors.New(newError)
 	}
@@ -67,7 +67,8 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 
 	var newBook = entity.Books{
-		Title: book.Title,
+		Title:      book.Title,
+		CategoryID: book.CategoryID,
 	}
 
 	createBook, err := s.reposirtory.NewBook(newBook)
@@ -94,7 +95,7 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) 
 		return BookFormat{}, err
 	}
 
-	if book.BookID == 0 {
+	if book.ID == 0 {
 		newError := fmt.Sprintf("Book id %s not found", bookID)
 
 		return BookFormat{}, errors.New(newError)
@@ -129,7 +130,7 @@ func (s *bookService) DeleteBookByID(bookID string) (interface{}, error) {
 		return nil, err
 	}
 
-	if book.BookID == 0 {
+	if book.ID == 0 {
 		newError := fmt.Sprintf("Book id %s not found", bookID)
 		return nil, errors.New(newError)
 	}
