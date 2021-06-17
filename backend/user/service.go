@@ -11,7 +11,7 @@ import (
 )
 
 type Service interface {
-	GetAllUser() []UserFormat
+	GetAllUser() ([]UserFormat, error)
 	SaveNewUser(user entity.UserInput) (UserFormat, error)
 	GetUserByID(userID string) (UserFormat, error)
 	DeleteUserByID(userID string) (interface{}, error)
@@ -75,6 +75,7 @@ func (s *service) SaveNewUser(user entity.UserInput) (UserFormat, error) {
 		Name:      user.Name,
 		Email:     user.Email,
 		Password:  string(genPassword),
+		Role:      "User",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -105,6 +106,7 @@ func (s *service) GetUserByID(userID string) (UserFormat, error) {
 		Name:      user.Name,
 		Email:     user.Email,
 		Password:  user.Password,
+		Role:      user.Role,
 		CreatedAt: user.CreatedAt,
 		UpdatedAt: user.UpdatedAt,
 	}
@@ -168,7 +170,7 @@ func (s *service) UpdateUserByID(userID string, dataInput entity.UpdateUserInput
 	}
 
 	if dataInput.Name != "" || len(dataInput.Name) != 0 {
-		dataUpdate["last_name"] = dataInput.Name
+		dataUpdate["name"] = dataInput.Name
 	}
 	if dataInput.Email != "" || len(dataInput.Email) != 0 {
 		dataUpdate["email"] = dataInput.Email

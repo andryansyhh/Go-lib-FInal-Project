@@ -8,7 +8,8 @@ type User struct {
 	UserName  string
 	Email     string `gorm:"unique"`
 	Password  string
-	CreateAt  time.Time
-	UpdateAt  time.Time
+	Role      string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 	DeletedAt time.Time `gorm:"index"`
 }
