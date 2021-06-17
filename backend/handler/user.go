@@ -23,13 +23,13 @@ func (h *userHandler) ShowUserHandler(c *gin.Context) {
 	users, err := h.userService.GetAllUser()
 
 	if err != nil {
-		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(500, responseError)
 		return
 	}
 
-	response := helper.APIResponse("success get all user", 200, "success", users)
+	response := helper.APINewResponse(200, "Success", users)
 	c.JSON(200, response)
 }
 
@@ -38,7 +38,7 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&inputUser); err != nil {
 		splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
+		responseError := helper.APINewResponse(400, "Input data required", gin.H{"errors": splitError})
 
 		c.JSON(400, responseError)
 		return
@@ -46,13 +46,13 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 
 	newUser, err := h.userService.SaveNewUser(inputUser)
 	if err != nil {
-		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(500, responseError)
 		return
 	}
 
-	response := helper.APIResponse("success create new User", 201, "status Created", newUser)
+	response := helper.APINewResponse(201, "Create new user succeed", newUser)
 	c.JSON(201, response)
 }
 
@@ -61,13 +61,13 @@ func (h *userHandler) GetUserByIDHandler(c *gin.Context) {
 
 	user, err := h.userService.GetUserByID(id)
 	if err != nil {
-		responseError := helper.APIResponse("error bad request user ID", 400, "error", gin.H{"error": err.Error()})
+		responseError := helper.APINewResponse(400, "Input params error", gin.H{"error": err.Error()})
 
 		c.JSON(400, responseError)
 		return
 	}
 
-	response := helper.APIResponse("success get user by ID", 200, "success", user)
+	response := helper.APINewResponse(200, "Success", user)
 	c.JSON(200, response)
 }
 
@@ -77,13 +77,13 @@ func (h *userHandler) DeleteUserByIDHandler(c *gin.Context) {
 	user, err := h.userService.DeleteUserByID(id)
 
 	if err != nil {
-		responseError := helper.APIResponse("error bad request delete user", 400, "error", gin.H{"error": err.Error()})
+		responseError := helper.APINewResponse(400, "Input params error", gin.H{"error": err.Error()})
 
 		c.JSON(400, responseError)
 		return
 	}
 
-	response := helper.APIResponse("success delete user by ID", 200, "success", user)
+	response := helper.APINewResponse(200, "Success", user)
 	c.JSON(200, response)
 }
 
@@ -94,7 +94,7 @@ func (h *userHandler) UpdateUserByIDHandler(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&updateUserInput); err != nil {
 		splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
+		responseError := helper.APINewResponse(400, "Input data required", gin.H{"errors": splitError})
 
 		c.JSON(400, responseError)
 		return
@@ -105,7 +105,7 @@ func (h *userHandler) UpdateUserByIDHandler(c *gin.Context) {
 	userData := int(c.MustGet("currentUser").(int))
 
 	if idParam != userData {
-		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user ID not authorize"})
+		responseError := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "user ID not authorize"})
 
 		c.JSON(401, responseError)
 		return
@@ -113,13 +113,13 @@ func (h *userHandler) UpdateUserByIDHandler(c *gin.Context) {
 
 	user, err := h.userService.UpdateUserByID(id, updateUserInput)
 	if err != nil {
-		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"error": err.Error()})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(500, responseError)
 		return
 	}
 
-	response := helper.APIResponse("success update user by ID", 200, "success", user)
+	response := helper.APINewResponse(200, "Success", user)
 	c.JSON(200, response)
 }
 
@@ -128,7 +128,7 @@ func (h *userHandler) LoginUserHandler(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&inputLoginUser); err != nil {
 		splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
+		responseError := helper.APINewResponse(400, "Input data required", gin.H{"errors": splitError})
 
 		c.JSON(400, responseError)
 		return
@@ -137,7 +137,7 @@ func (h *userHandler) LoginUserHandler(c *gin.Context) {
 	userData, err := h.userService.LoginUser(inputLoginUser)
 
 	if err != nil {
-		responseError := helper.APIResponse("input data error", 401, "error", gin.H{"errors": err})
+		responseError := helper.APINewResponse(401, "Input data error", gin.H{"errors": err.Error()})
 
 		c.JSON(401, responseError)
 		return
@@ -145,11 +145,11 @@ func (h *userHandler) LoginUserHandler(c *gin.Context) {
 
 	token, err := h.authService.GenerateToken(userData.ID)
 	if err != nil {
-		responseError := helper.APIResponse("internal server error", 500, "error", gin.H{"errors": err})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(401, responseError)
 		return
 	}
-	response := helper.APIResponse("success login user", 200, "success", gin.H{"token": token})
+	response := helper.APINewResponse(200, "Login user succeed", gin.H{"token": token, "role": userData.Role})
 	c.JSON(200, response)
 }
