@@ -60,7 +60,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
     ]
 }
@@ -96,9 +97,9 @@ _Request Body_
 ```go
 {
     "name": "string"
-  	"user_name": "string",
-  	"email": "string",
-  	"password": "string"
+    "user_name": "string",
+    "email": "string",
+    "password": "string"
 }
 ```
 
@@ -113,7 +114,8 @@ _Response (201)_
         	"id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
     	}
 }
 ```
@@ -173,7 +175,7 @@ _Response (200)_
     "message": "Login user succeed"
     "data": {
         "token": "string",
-        "role": "bool"
+        "role": "string"
     }
 }
 ```
@@ -248,7 +250,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
 }
 ```
@@ -301,7 +304,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
 }
 ```
@@ -604,7 +608,7 @@ _Request Body_
 
 ```go
 {
-    "id" : "int",
+    "category_name" : "string",
 }
 ```
 
