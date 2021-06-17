@@ -23,7 +23,7 @@ func FormatBook(book entity.Books) BookFormat {
 	var formatBook = BookFormat{
 		ID:         book.ID,
 		Title:      book.Title,
-		UrlFile:    book.UrlFile,
+		UrlFile:    book.BookDetail.UrlFile,
 		UrlVideo:   book.UrlVideo,
 		CategoryID: book.CategoryID,
 	}

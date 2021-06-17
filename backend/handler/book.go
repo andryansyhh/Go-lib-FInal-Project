@@ -71,7 +71,7 @@ func (h *bookHandler) CreateBookHandler(c *gin.Context) {
 func (h *bookHandler) UpdateBookByIDHandler(c *gin.Context) {
 	bookID := c.Param("id")
 
-	var updateInputBook entity.BookInput
+	var updateInputBook entity.UpdateBookInput
 
 	if err := c.ShouldBindJSON(&updateInputBook); err != nil {
 		splitError := helper.SplitErrorInformation(err)

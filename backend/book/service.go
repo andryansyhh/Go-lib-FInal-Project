@@ -12,7 +12,7 @@ type BookService interface {
 	GetAllBook() ([]BookFormat, error)
 	GetBookByID(bookID string) (BookFormat, error)
 	SaveNewBook(book entity.BookInput) (BookFormat, error)
-	UpdateBookByID(bookID string, dataInput entity.BookInput) (BookFormat, error)
+	UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error)
 	DeleteBookByID(bookID string) (interface{}, error)
 }
 
@@ -69,6 +69,7 @@ func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 	var newBook = entity.Books{
 		Title:      book.Title,
 		CategoryID: book.CategoryID,
+		UrlVideo:   book.UrlVideo,
 	}
 
 	createBook, err := s.reposirtory.NewBook(newBook)
@@ -81,7 +82,7 @@ func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 	return formatBook, nil
 }
 
-func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) (BookFormat, error) {
+func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error) {
 
 	var dataUpdate = map[string]interface{}{}
 
@@ -103,6 +104,12 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) 
 
 	if dataInput.Title != "" || len(dataInput.Title) != 0 {
 		dataUpdate["title"] = dataInput.Title
+	}
+	if dataInput.CategoryID != 0 {
+		dataUpdate["category_id"] = dataInput.CategoryID
+	}
+	if dataInput.UrlVideo != "" || len(dataInput.UrlVideo) != 0 {
+		dataUpdate["url_video"] = dataInput.UrlVideo
 	}
 
 	dataUpdate["updated_at"] = time.Now()
