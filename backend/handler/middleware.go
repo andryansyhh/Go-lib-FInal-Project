@@ -14,7 +14,7 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" || len(authHeader) == 0 {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize user"})
+			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
@@ -24,7 +24,7 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 		token, err := authService.ValidateToken(authHeader)
 
 		if err != nil {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": err.Error()})
+			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
@@ -33,16 +33,16 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 		claim, ok := token.Claims.(jwt.MapClaims)
 
 		if !ok {
-			errorResponse := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "unauthorize user"})
+			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
-		pasienID := int(claim["user_id"].(float64))
+		userID := int(claim["user_id"].(float64))
 
 		// kita bisa pakai nanti
-		c.Set("currentUser", pasienID)
+		c.Set("currentUser", userID)
 		// -
 	}
 
@@ -62,11 +62,27 @@ func AdminMiddleware(userRepository user.Repository) gin.HandlerFunc {
 			return
 		}
 		if user.Role != "admin" {
-			errorResponse := gin.H{"error": "user login is not admin atau dokter"}
+			errorResponse := gin.H{"error": "user login is not admin"}
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
 		}
 
+	}
+}
+
+func CorsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE, PATCH, UPDATE")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(200)
+			return
+		}
+
+		c.Next()
 	}
 }
