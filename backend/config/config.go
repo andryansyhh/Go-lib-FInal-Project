@@ -28,6 +28,7 @@ func Connection() *gorm.DB {
 	db.AutoMigrate(&migration.User{})
 	db.AutoMigrate(&entity.Categories{})
 	db.AutoMigrate(&entity.Books{})
+	db.AutoMigrate(&entity.BookDetail{})
 
 	return db
 }
