@@ -17,6 +17,7 @@
 - `GET /categories/all`
 - `POST /categories`
 - `GET /categories/:id`
+- `PUT /categories/:id`
 - `DELETE /categories/:id`
 
 ### books
