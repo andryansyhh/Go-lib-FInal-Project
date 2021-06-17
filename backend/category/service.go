@@ -14,6 +14,7 @@ type CategoryService interface {
 	FindCategoryByID(categoryID string) (entity.Categories, error)
 	UpdateCategoryByID(categoryID string, dataInput entity.CategoryInput) (CategoryFormat, error)
 	DeleteCategoryByID(categoryID string) (interface{}, error)
+	LengthAllCategory() (interface{}, error)
 }
 
 type categoryService struct {
@@ -140,4 +141,14 @@ func (s *categoryService) DeleteCategoryByID(categoryID string) (interface{}, er
 	formatDelete := FormatDeleteCategory(msg)
 
 	return formatDelete, nil
+}
+
+func (s *categoryService) LengthAllCategory() (interface{}, error) {
+	length, err := s.repository.LengthCategory()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return length, nil
 }
