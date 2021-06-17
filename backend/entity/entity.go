@@ -5,6 +5,7 @@ import "time"
 type User struct {
 	ID        int       `gorm:"primaryKey" json:"id"`
 	Name      string    `json:"name"`
+	UserName  string    `json:"user_name"`
 	Email     string    `json:"email"`
 	Password  string    `json:"-"`
 	Role      string    `json:"role"`
@@ -19,11 +20,13 @@ type LoginUserInput struct {
 
 type UserInput struct {
 	Name     string `json:"name" binding:"required"`
+	UserName string `json:"user_name" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
 }
 
 type UpdateUserInput struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	Name     string `json:"name"`
+	UserName string `json:"user_name"`
+	Email    string `json:"email"`
 }
