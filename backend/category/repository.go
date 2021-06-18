@@ -12,6 +12,7 @@ type CategoryRepository interface {
 	FindCategoryID(categoryID string) (entity.Categories, error)
 	UpdateCategory(categoryID string, dataUpdate map[string]interface{}) (entity.Categories, error)
 	DeleteCategory(categoryID string) (string, error)
+	LengthCategory() (int, error)
 }
 
 type Repository struct {
@@ -44,7 +45,7 @@ func (r *Repository) NewCategory(category entity.Categories) (entity.Categories,
 func (r *Repository) FindCategoryID(categoryID string) (entity.Categories, error) {
 	var category entity.Categories
 
-	if err := r.db.Where("id = ?", categoryID).Preload("Books").Find(&category).Error; err != nil {
+	if err := r.db.Where("id = ?", categoryID).Preload("Books.BookDetail").Find(&category).Error; err != nil {
 		return category, err
 	}
 
@@ -71,4 +72,13 @@ func (r *Repository) DeleteCategory(categoryID string) (string, error) {
 	}
 
 	return "success", nil
+}
+
+func (r *Repository) LengthCategory() (int, error) {
+	var Category []entity.Categories
+
+	result := r.db.Find(&Category)
+	length := result.RowsAffected
+
+	return int(length), nil
 }

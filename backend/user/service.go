@@ -35,7 +35,7 @@ func (s *service) LoginUser(input entity.LoginUserInput) (entity.User, error) {
 	}
 
 	if user.ID == 0 {
-		newError := fmt.Sprintf("user id %v not found", user.ID)
+		newError := "user is not found"
 		return user, errors.New(newError)
 	}
 
@@ -73,6 +73,7 @@ func (s *service) SaveNewUser(user entity.UserInput) (UserFormat, error) {
 
 	var newUser = entity.User{
 		Name:      user.Name,
+		UserName:  user.UserName,
 		Email:     user.Email,
 		Password:  string(genPassword),
 		Role:      "User",
@@ -104,6 +105,7 @@ func (s *service) GetUserByID(userID string) (UserFormat, error) {
 	var userData = entity.User{
 		ID:        user.ID,
 		Name:      user.Name,
+		UserName:  user.UserName,
 		Email:     user.Email,
 		Password:  user.Password,
 		Role:      user.Role,
@@ -174,6 +176,9 @@ func (s *service) UpdateUserByID(userID string, dataInput entity.UpdateUserInput
 	}
 	if dataInput.Email != "" || len(dataInput.Email) != 0 {
 		dataUpdate["email"] = dataInput.Email
+	}
+	if dataInput.UserName != "" || len(dataInput.UserName) != 0 {
+		dataUpdate["user_name"] = dataInput.UserName
 	}
 
 	dataUpdate["updated_at"] = time.Now()

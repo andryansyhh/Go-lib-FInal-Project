@@ -25,7 +25,7 @@ func NewBookRepository(db *gorm.DB) *Repository {
 func (r *Repository) GetAll() ([]entity.Books, error) {
 	var book []entity.Books
 
-	err := r.db.Find(&book).Error
+	err := r.db.Preload("BookDetail").Find(&book).Error
 	if err != nil {
 		return book, err
 	}
@@ -44,7 +44,7 @@ func (r *Repository) NewBook(book entity.Books) (entity.Books, error) {
 func (r *Repository) FindBookID(bookID string) (entity.Books, error) {
 	var book entity.Books
 
-	if err := r.db.Where("id = ?", bookID).Preload("Books").Find(&book).Error; err != nil {
+	if err := r.db.Where("id = ?", bookID).Preload("BookDetail").Find(&book).Error; err != nil {
 		return book, err
 	}
 

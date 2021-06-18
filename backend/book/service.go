@@ -12,7 +12,7 @@ type BookService interface {
 	GetAllBook() ([]BookFormat, error)
 	GetBookByID(bookID string) (BookFormat, error)
 	SaveNewBook(book entity.BookInput) (BookFormat, error)
-	UpdateBookByID(bookID string, dataInput entity.BookInput) (BookFormat, error)
+	UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error)
 	DeleteBookByID(bookID string) (interface{}, error)
 }
 
@@ -54,8 +54,8 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 		return BookFormat{}, err
 	}
 
-	if book.BookID == 0 {
-		newError := fmt.Sprintf("Book id %d not found", book.BookID)
+	if book.ID == 0 {
+		newError := fmt.Sprintf("Book id %s not found", bookID)
 
 		return BookFormat{}, errors.New(newError)
 	}
@@ -67,7 +67,9 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 
 	var newBook = entity.Books{
-		Title: book.Title,
+		Title:      book.Title,
+		CategoryID: book.CategoryID,
+		UrlVideo:   book.UrlVideo,
 	}
 
 	createBook, err := s.reposirtory.NewBook(newBook)
@@ -80,7 +82,7 @@ func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 	return formatBook, nil
 }
 
-func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) (BookFormat, error) {
+func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error) {
 
 	var dataUpdate = map[string]interface{}{}
 
@@ -94,7 +96,7 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) 
 		return BookFormat{}, err
 	}
 
-	if book.BookID == 0 {
+	if book.ID == 0 {
 		newError := fmt.Sprintf("Book id %s not found", bookID)
 
 		return BookFormat{}, errors.New(newError)
@@ -102,6 +104,12 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.BookInput) 
 
 	if dataInput.Title != "" || len(dataInput.Title) != 0 {
 		dataUpdate["title"] = dataInput.Title
+	}
+	if dataInput.CategoryID != 0 {
+		dataUpdate["category_id"] = dataInput.CategoryID
+	}
+	if dataInput.UrlVideo != "" || len(dataInput.UrlVideo) != 0 {
+		dataUpdate["url_video"] = dataInput.UrlVideo
 	}
 
 	dataUpdate["updated_at"] = time.Now()
@@ -129,7 +137,7 @@ func (s *bookService) DeleteBookByID(bookID string) (interface{}, error) {
 		return nil, err
 	}
 
-	if book.BookID == 0 {
+	if book.ID == 0 {
 		newError := fmt.Sprintf("Book id %s not found", bookID)
 		return nil, errors.New(newError)
 	}
