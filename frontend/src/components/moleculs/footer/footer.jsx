@@ -7,8 +7,8 @@ const Footer = () => {
 
 
   return (
-    <div>
-      <footer className="d-flex flex-column bg-light ">
+    <div className="position-absolute bottom-0 start-0 end-0">
+      <footer className="d-flex flex-column bg-light">
         <div className="footer-top row">
           <div className="col-4">
             <h1>Go-Lib</h1>
