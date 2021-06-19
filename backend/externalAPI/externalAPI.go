@@ -9,7 +9,7 @@ import (
 
 func ExternalAPI() (entity.Data, error) {
 
-	url := "https://newsapi.org/v2/everything?language=en&pageSize=100&sortBy=publishedAt&sources=hacker-news&apiKey=e067289e827641599e90278cad01aefb"
+	url := "https://newsapi.org/v2/top-headlines?language=en&pageSize=100&sortBy=publishedAt&category=technology&apiKey=e067289e827641599e90278cad01aefb"
 
 	req, _ := http.NewRequest("GET", url, nil)
 
