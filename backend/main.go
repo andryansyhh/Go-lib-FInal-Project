@@ -16,5 +16,6 @@ func main() {
 	routes.CategoryRoute(r)
 	routes.BooksRoute(r)
 	routes.BookDetailRoute(r)
+	routes.ContentRoute(r)
 	r.Run(":4444")
 }
