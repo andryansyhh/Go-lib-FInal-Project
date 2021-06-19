@@ -1,12 +1,10 @@
 import "./App.css";
-import Footer from "./components/moleculs/footer/footer";
-import Header from "./components/moleculs/header/header.jsx";
+import Register from "./components/moleculs/pages/register";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Footer/>
+      <Register/>
     </div>
   );
 }
