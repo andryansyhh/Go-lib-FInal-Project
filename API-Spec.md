@@ -34,6 +34,10 @@
 - `POST /book_detail/:id`
 - `PUT /book_detail/:id`
 
+### contents
+
+- `GET /contents`
+
 ## RESTful endpoints users
 
 ### GET /users
@@ -1180,3 +1184,54 @@ _Response (500 - Internal Server Error)_
       	}
 }
 ```
+
+## RESTful endpoints books
+
+### GET /contents
+
+> Get All users
+
+_Request Header_
+
+```go
+not needed
+```
+
+_Request Body_
+
+```go
+not needed
+```
+
+_Response (200)_
+
+```go
+{
+    "code": "200",
+    "message": "Success",
+    "data": [
+        {
+            "title": "string",
+            "description": "string",
+            "url": "string",
+            "urlToImage": "string",
+            "publishedAt": "date"
+        }
+    ]
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```go
+{
+  	"code": 500,
+    "message": "Internal server error",
+  	"data":
+      	{
+        	"error": ""
+      	}
+}
+```
+
+###
