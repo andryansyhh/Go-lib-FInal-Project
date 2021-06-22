@@ -15,8 +15,9 @@ var (
 
 func CategoryRoute(r *gin.Engine) {
 	r.GET("/categories", handler.Middleware(userService, authService), categoryHandler.ShowAllCategoryHandler)
-	r.POST("/categories", handler.AdminMiddleware(userRepository), categoryHandler.CreateCategoryHandler)
+	r.POST("/categories", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), categoryHandler.CreateCategoryHandler)
 	r.GET("/categories/:id", handler.Middleware(userService, authService), categoryHandler.ShowCategoryDetailByID)
-	r.PUT("/categories/:id", handler.AdminMiddleware(userRepository), categoryHandler.UpdateCategoryByIDHandler)
-	r.DELETE("/categories/:id", handler.AdminMiddleware(userRepository), categoryHandler.DeleteCategoryHandler)
+	r.PUT("/categories/:id", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), categoryHandler.UpdateCategoryByIDHandler)
+	r.DELETE("/categories/:id", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), categoryHandler.DeleteCategoryHandler)
+	r.GET("/categories/all", categoryHandler.LengthCategoryHandler)
 }

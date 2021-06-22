@@ -6,10 +6,11 @@ import (
 )
 
 type UserFormat struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-	Role  string `json:"role"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	UserName string `json:"user_name"`
+	Email    string `json:"email"`
+	Role     string `json:"role"`
 }
 
 type DeleteFormat struct {
@@ -19,10 +20,11 @@ type DeleteFormat struct {
 
 func FormatUser(user entity.User) UserFormat {
 	var formatUser = UserFormat{
-		ID:    user.ID,
-		Name:  user.Name,
-		Email: user.Email,
-		Role:  user.Role,
+		ID:       user.ID,
+		Name:     user.Name,
+		UserName: user.UserName,
+		Email:    user.Email,
+		Role:     user.Role,
 	}
 
 	return formatUser

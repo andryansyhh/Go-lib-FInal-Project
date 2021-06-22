@@ -23,6 +23,7 @@ func (h *bookHandler) ShowAllBookHandler(c *gin.Context) {
 		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(500, responseError)
+		return
 	}
 
 	response := helper.APINewResponse(200, "Success", categories)
@@ -57,9 +58,9 @@ func (h *bookHandler) CreateBookHandler(c *gin.Context) {
 
 	response, err := h.bookService.SaveNewBook(bookInput)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"error": err.Error(),
-		})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
 		return
 	}
 
@@ -70,7 +71,7 @@ func (h *bookHandler) CreateBookHandler(c *gin.Context) {
 func (h *bookHandler) UpdateBookByIDHandler(c *gin.Context) {
 	bookID := c.Param("id")
 
-	var updateInputBook entity.BookInput
+	var updateInputBook entity.UpdateBookInput
 
 	if err := c.ShouldBindJSON(&updateInputBook); err != nil {
 		splitError := helper.SplitErrorInformation(err)

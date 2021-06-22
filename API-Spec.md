@@ -29,6 +29,15 @@
 - `PUT /books/:id`
 - `DELETE /books/:id`
 
+### book_detail
+
+- `POST /book_detail/:id`
+- `PUT /book_detail/:id`
+
+### contents
+
+- `GET /contents`
+
 ## RESTful endpoints users
 
 ### GET /users
@@ -60,7 +69,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
     ]
 }
@@ -96,9 +106,9 @@ _Request Body_
 ```go
 {
     "name": "string"
-  	"user_name": "string",
-  	"email": "string",
-  	"password": "string"
+    "user_name": "string",
+    "email": "string",
+    "password": "string"
 }
 ```
 
@@ -113,7 +123,8 @@ _Response (201)_
         	"id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
     	}
 }
 ```
@@ -173,7 +184,7 @@ _Response (200)_
     "message": "Login user succeed"
     "data": {
         "token": "string",
-        "role": "bool"
+        "role": "string"
     }
 }
 ```
@@ -248,7 +259,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
 }
 ```
@@ -301,7 +313,8 @@ _Response (200)_
             "id": "int",
             "name": "string",
             "user_name": "string",
-            "email": "string"
+            "email": "string",
+            "role": "string
         }
 }
 ```
@@ -564,9 +577,17 @@ _Response (200)_
             "category_name": "string",
             "books": [
                 {
+                    "id": "int",
                     "title": "string",
-                    "path_file": "string",
-                    "url_video": "string"
+                    "book_detail": {
+                        "id": "int",
+                        "url_file": "string",
+                        "book_id": "int"
+                    },
+                    "url_video": "string",
+                    "category_id": "int",
+                    "created_at": "time",
+                    "updated_at": "time"
                 }
             ]
         }
@@ -604,7 +625,7 @@ _Request Body_
 
 ```go
 {
-    "id" : "int",
+    "category_name" : "string",
 }
 ```
 
@@ -720,16 +741,14 @@ _Response (200)_
             "title": "string",
             "path_file": "string",
             "url_video": "string",
-            "category_id": "int",
-            "category_name": "string"
+            "category_id": "int"
         },
         {
             "id": "int",
             "title": "string",
             "path_file": "string",
             "url_video": "string",
-            "category_id": "int",
-            "category_name": "string"
+            "category_id": "int"
         }
     ]
 }
@@ -824,8 +843,7 @@ _Response (200)_
             "title": "string",
             "path_file": "string",
             "url_video": "string",
-            "category_id": "int",
-            "category_name": "string"
+            "category_id": "int"
         }
 }
 ```
@@ -860,7 +878,6 @@ _Request Body_
 ```go
 {
     "title": "string",
-    "path_file": "string",
     "url_video": "string",
     "category_id": "int"
 }
@@ -876,10 +893,9 @@ _Response (200)_
         {
             "id": "int",
             "title": "string",
-            "path_file": "string",
+            "url_file": "string",
             "url_video": "string",
-            "category_id": "int",
-            "category_name": "string"
+            "category_id": "int"
         }
 }
 ```
@@ -942,7 +958,6 @@ _Request Body_
 ```go
 {
     "title": "string",
-    "path_file": "string",
     "url_video": "string",
     "category_id": "int"
 }
@@ -958,10 +973,9 @@ _Response (200)_
         {
             "id": "int",
             "title": "string",
-            "path_file": "string",
+            "url_file": "string",
             "url_video": "string",
-            "category_id": "int",
-            "category_name": "string"
+            "category_id": "int"
         }
 }
 ```
@@ -1031,3 +1045,193 @@ _Response (500 - Internal Server Error)_
       	}
 }
 ```
+
+## RESTful endpoints books
+
+### POST /book_detail/:id
+
+> Add book detail (url file)
+
+_Request Header_
+
+```go
+{
+   "Authorization": "<your Authorization>"
+}
+```
+
+_Request Body_
+
+```go
+form-data
+key: "file"
+type: "File"
+```
+
+_Response (200)_
+
+```go
+{
+    "code": 200,
+    "message": "Success",
+    "data":
+        {
+            "id": "int",
+        	"url_file": "string",
+        	"book_id": "int"
+        }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```go
+{
+    "code": 400,
+    "message": "Input data required"
+  	"data":
+      	{
+        	"errors": []
+      	}
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```go
+{
+    "code": 401,
+    "message": "Unauthorized user"
+  	"data":
+      	{
+        	"error": ""
+      	}
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```go
+{
+  	"code": 500,
+    "message": "Internal server error",
+  	"data":
+      	{
+        	"error": ""
+      	}
+}
+```
+
+---
+
+### PUT /books/:id
+
+> update book by id
+
+_Request Header_
+
+```go
+{
+   "Authorization": "<your Authorization>"
+}
+```
+
+_Request Body_
+
+```go
+form-data
+key: "file"
+type: "File"
+```
+
+_Response (200)_
+
+```go
+{
+    "code": 200,
+    "message": "Success",
+    "data":
+        {
+            "id": "int",
+        	"url_file": "string",
+        	"book_id": "int"
+        }
+}
+```
+
+_Response (400 - Bad Request)_
+
+```go
+{
+    "code": 400,
+    "message": "Input data required"
+  	"data":
+      	{
+        	"errors": []
+      	}
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```go
+{
+  	"code": 500,
+    "message": "Internal server error",
+  	"data":
+      	{
+        	"error": ""
+      	}
+}
+```
+
+## RESTful endpoints books
+
+### GET /contents
+
+> Get All users
+
+_Request Header_
+
+```go
+not needed
+```
+
+_Request Body_
+
+```go
+not needed
+```
+
+_Response (200)_
+
+```go
+{
+    "code": "200",
+    "message": "Success",
+    "data": [
+        {
+            "title": "string",
+            "description": "string",
+            "url": "string",
+            "urlToImage": "string",
+            "publishedAt": "date"
+        }
+    ]
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```go
+{
+  	"code": 500,
+    "message": "Internal server error",
+  	"data":
+      	{
+        	"error": ""
+      	}
+}
+```
+
+###

@@ -23,6 +23,7 @@ func (h *categoryHandler) ShowAllCategoryHandler(c *gin.Context) {
 		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
 		c.JSON(500, responseError)
+		return
 	}
 
 	response := helper.APINewResponse(200, "Success", categories)
@@ -42,9 +43,9 @@ func (h *categoryHandler) CreateCategoryHandler(c *gin.Context) {
 
 	response, err := h.categoryService.SaveNewCategory(categoryInput)
 	if err != nil {
-		c.JSON(500, gin.H{
-			"error": err.Error(),
-		})
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
 		return
 	}
 
@@ -107,4 +108,19 @@ func (h *categoryHandler) DeleteCategoryHandler(c *gin.Context) {
 
 	response := helper.APINewResponse(200, "Success", category)
 	c.JSON(200, response)
+}
+
+func (h *categoryHandler) LengthCategoryHandler(c *gin.Context) {
+	length, err := h.categoryService.LengthAllCategory()
+
+	if err != nil {
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APINewResponse(200, "Success", length)
+	c.JSON(200, response)
+
 }

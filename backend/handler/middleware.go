@@ -4,6 +4,7 @@ import (
 	"golib/auth"
 	"golib/helper"
 	"golib/user"
+	"strconv"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -50,9 +51,9 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 
 func AdminMiddleware(userRepository user.Repository) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		userLogin := c.MustGet("currentUser").(string)
-
-		user, err := userRepository.FindByID(userLogin)
+		userLogin := c.MustGet("currentUser").(int)
+		userID := strconv.Itoa(userLogin)
+		user, err := userRepository.FindByID(userID)
 
 		if err != nil {
 			errorResponse := gin.H{"error": "error in internal middleware"}

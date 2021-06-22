@@ -6,10 +6,11 @@ import (
 )
 
 type BookFormat struct {
-	BookID   int    `gorm:"primaryKey" json:"book_id"`
-	Title    string `json:"title"`
-	UrlFile  string `json:"url_file"`
-	UrlVideo string `json:"url_video"`
+	ID         int    `gorm:"primaryKey" json:"id"`
+	Title      string `json:"title"`
+	UrlFile    string `json:"url_file"`
+	UrlVideo   string `json:"url_video"`
+	CategoryID int    `json:"category_id"`
 }
 
 type DeleteBookformat struct {
@@ -20,10 +21,11 @@ type DeleteBookformat struct {
 func FormatBook(book entity.Books) BookFormat {
 
 	var formatBook = BookFormat{
-		BookID:   book.BookID,
-		Title:    book.Title,
-		UrlFile:  book.UrlFile,
-		UrlVideo: book.UrlVideo,
+		ID:         book.ID,
+		Title:      book.Title,
+		UrlFile:    book.BookDetail.UrlFile,
+		UrlVideo:   book.UrlVideo,
+		CategoryID: book.CategoryID,
 	}
 
 	return formatBook

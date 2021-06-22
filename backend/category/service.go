@@ -11,9 +11,10 @@ import (
 type CategoryService interface {
 	GetAllCategories() ([]CategoryFormat, error)
 	SaveNewCategory(category entity.CategoryInput) (CategoryFormat, error)
-	FindCategoryByID(categoryID string) (entity.Categories, error)
+	FindCategoryByID(categoryID string) (DetailCategoryFormat, error)
 	UpdateCategoryByID(categoryID string, dataInput entity.CategoryInput) (CategoryFormat, error)
 	DeleteCategoryByID(categoryID string) (interface{}, error)
+	LengthAllCategory() (interface{}, error)
 }
 
 type categoryService struct {
@@ -56,23 +57,24 @@ func (s *categoryService) SaveNewCategory(category entity.CategoryInput) (Catego
 	return formatCategory, nil
 }
 
-func (s *categoryService) FindCategoryByID(categoryID string) (entity.Categories, error) {
+func (s *categoryService) FindCategoryByID(categoryID string) (DetailCategoryFormat, error) {
 	if err := helper.ValidateIDNumber(categoryID); err != nil {
-		return entity.Categories{}, err
+		return DetailCategoryFormat{}, err
 	}
 
 	category, err := s.repository.FindCategoryID(categoryID)
 
 	if err != nil {
-		return entity.Categories{}, err
+		return DetailCategoryFormat{}, err
 	}
 
 	if category.ID == 0 {
 		newError := fmt.Sprintf("category id %s not found", categoryID)
-		return entity.Categories{}, errors.New(newError)
+		return DetailCategoryFormat{}, errors.New(newError)
 	}
 
-	return entity.Categories{}, nil
+	formatCategory := FormattingDetailCategory(category)
+	return formatCategory, nil
 }
 
 func (s *categoryService) UpdateCategoryByID(categoryID string, dataInput entity.CategoryInput) (CategoryFormat, error) {
@@ -140,4 +142,14 @@ func (s *categoryService) DeleteCategoryByID(categoryID string) (interface{}, er
 	formatDelete := FormatDeleteCategory(msg)
 
 	return formatDelete, nil
+}
+
+func (s *categoryService) LengthAllCategory() (interface{}, error) {
+	length, err := s.repository.LengthCategory()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return length, nil
 }
