@@ -17,5 +17,5 @@ func main() {
 	routes.BooksRoute(r)
 	routes.BookDetailRoute(r)
 	routes.ContentRoute(r)
-	r.Run(":4444")
+	r.Run()
 }
