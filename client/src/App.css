@@ -1,0 +1,48 @@
+* {
+    color: #202023 !important;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.page-container{
+ width: 100vw;
+ height: 100vh;
+
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.section2-container {
+    background-color: #3F4045  !important;
+    color: #EBF2FA;
+
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.title {
+    font-weight: 700 !important;
+}
+
+.content-container {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.footer-container {
+     /* padding: 2vw !important; */
+    
+}
+
+.footer-1, .footer-2 {
+    padding: 2vw;
+    display: flex;
+    align-items: center;
+}
