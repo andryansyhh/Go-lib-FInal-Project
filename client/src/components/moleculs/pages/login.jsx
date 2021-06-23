@@ -32,7 +32,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="container d-flex justify-content-end">
+      <Header />
+      <div className="container d-flex justify-content-center">
         <Form className="col-4 mt-5" onSubmit={loginSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
@@ -43,9 +44,7 @@ const Login = () => {
                 setEmail(e.target.value);
               }}
             />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -67,6 +66,7 @@ const Login = () => {
           </Form.Group>
         </Form>
       </div>
+      <Footer />
     </>
   );
 };

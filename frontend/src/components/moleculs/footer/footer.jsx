@@ -7,7 +7,7 @@ const Footer = () => {
 
 
   return (
-    <div className="position-absolute bottom-0 start-0 end-0">
+    <div className="mt-5 position-absolute bottom-0 start-0 end-0">
       <footer className="d-flex flex-column bg-light">
         <div className="footer-top row">
           <div className="col-4">
