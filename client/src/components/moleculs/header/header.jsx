@@ -1,13 +1,21 @@
 import React from "react";
+import { useHistory } from "react-router";
 
 const Header = () => {
+  const history = useHistory();
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-          <a class="navbar-brand" href="/">
+          <div
+            onClick={() => {
+              history.push("/");
+            }}
+            class="navbar-brand pe-auto navname"
+          >
             Go-Lib
-          </a>
+          </div>
           <button
             class="navbar-toggler"
             type="button"
@@ -24,16 +32,26 @@ const Header = () => {
             class="collapse navbar-collapse justify-content-end"
             id="navbarNav"
           >
-            <ul class="navbar-nav">
-              <li class="Login">
-                <a class="nav-link active" aria-current="page" href="/">
+            <ul class="navbar-nav navlogin">
+              <li
+                onClick={() => {
+                  history.push("/login");
+                }}
+                class="Login pe-auto"
+              >
+                <div class="nav-link active" aria-current="page">
                   Login
-                </a>
+                </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">
+              <li
+                onClick={() => {
+                  history.push("/register");
+                }}
+                class="nav-item navregis"
+              >
+                <div class="nav-link active" aria-current="page">
                   Register
-                </a>
+                </div>
               </li>
             </ul>
           </div>

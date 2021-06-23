@@ -10,6 +10,7 @@ function App() {
     <div className="App position-relative">
       <Router>
         <Switch>
+
           <Route path="/register">
             <Register />
           </Route>
@@ -17,7 +18,8 @@ function App() {
             <Login />
           </Route>
           <Route path="/news" exact component={ContentPage} />
-          <Route path="/landingpage" exact component={LandingPage} />
+          <Route path="/" exact component={LandingPage} />
+         
         </Switch>
       </Router>
     </div>

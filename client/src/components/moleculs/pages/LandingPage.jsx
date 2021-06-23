@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../footer/footer";
 import Header from "../header/header";
-import landingPict from "../../../assets/landingpict.jpg";
+import learningbro from "../../../assets/Learning-bro.svg";
 
 function LandingPage() {
   return (
@@ -18,12 +18,18 @@ function LandingPage() {
                 </h1>
                 <p>― Atwood H. Townsend</p>
                 <button type="button" class="btn btn-primary">
-                  Primary
+                  More
                 </button>
               </div>
             </div>
             <div className="col-sm">
-              {/* <img src={landingPict} alt="" /> */}
+              <div className="img-container">
+                <img
+                  classname="img-fluid img-landing"
+                  src={learningbro}
+                  alt=""
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -32,8 +38,8 @@ function LandingPage() {
       <div className="container-fluid  page-container section2-container">
         <div className="container">
           <div className="row ">
-            <div className="col-sm">20</div>
-            <div className="col-sm">2</div>
+            <div className="col-sm text-center">20+ Katergori</div>
+            <div className="col-sm text-center">80+ Materi</div>
           </div>
         </div>
       </div>
