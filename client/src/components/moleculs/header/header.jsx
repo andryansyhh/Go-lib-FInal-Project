@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
+import Footer from "../footer/footer";
 
 const Header = () => {
   const history = useHistory();
