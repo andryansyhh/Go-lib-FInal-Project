@@ -11,8 +11,9 @@ import (
 type BookService interface {
 	GetAllBook() ([]BookFormat, error)
 	GetBookByID(bookID string) (BookFormat, error)
-	SaveNewBook(book entity.BookInput) (BookFormat, error)
+	SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error)
 	UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error)
+	UpdateFileByID(pathFile, bookID string) (BookFormat, error)
 	DeleteBookByID(bookID string) (interface{}, error)
 }
 
@@ -64,12 +65,12 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 	return formatBook, nil
 }
 
-func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
-
+func (s *bookService) SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error) {
 	var newBook = entity.Books{
-		Title:      book.Title,
-		CategoryID: book.CategoryID,
-		UrlVideo:   book.UrlVideo,
+		Title:      title,
+		CategoryID: categoryID,
+		UrlVideo:   urlVideo,
+		UrlFile: 		urlFile,
 	}
 
 	createBook, err := s.reposirtory.NewBook(newBook)
@@ -110,6 +111,42 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookI
 	}
 	if dataInput.UrlVideo != "" || len(dataInput.UrlVideo) != 0 {
 		dataUpdate["url_video"] = dataInput.UrlVideo
+	}
+	dataUpdate["updated_at"] = time.Now()
+
+	bookUpdated, err := s.reposirtory.UpdateBook(bookID, dataUpdate)
+
+	if err != nil {
+		return BookFormat{}, err
+	}
+
+	formatBook := FormatBook(bookUpdated)
+
+	return formatBook, nil
+}
+
+func (s *bookService) UpdateFileByID(pathFile, bookID string) (BookFormat, error) {
+
+	var dataUpdate = map[string]interface{}{}
+
+	if err := helper.ValidateIDNumber(bookID); err != nil {
+		return BookFormat{}, err
+	}
+
+	book, err := s.reposirtory.FindBookID(bookID)
+
+	if err != nil {
+		return BookFormat{}, err
+	}
+
+	if book.ID == 0 {
+		newError := fmt.Sprintf("Book id %s not found", bookID)
+
+		return BookFormat{}, errors.New(newError)
+	}
+
+	if pathFile != "" || len(pathFile) != 0 {
+		dataUpdate["url_file"] = pathFile
 	}
 
 	dataUpdate["updated_at"] = time.Now()

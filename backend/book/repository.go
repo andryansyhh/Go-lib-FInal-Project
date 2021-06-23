@@ -11,6 +11,7 @@ type BookRepository interface {
 	NewBook(book entity.Books) (entity.Books, error)
 	FindBookID(bookID string) (entity.Books, error)
 	UpdateBook(bookID string, dataUpdate map[string]interface{}) (entity.Books, error)
+	UpdateBookFile(bookID string, dataUpdate map[string]interface{}) (entity.Books, error)
 	DeleteBook(bookID string) (string, error)
 }
 
@@ -25,7 +26,7 @@ func NewBookRepository(db *gorm.DB) *Repository {
 func (r *Repository) GetAll() ([]entity.Books, error) {
 	var book []entity.Books
 
-	err := r.db.Preload("BookDetail").Find(&book).Error
+	err := r.db.Find(&book).Error
 	if err != nil {
 		return book, err
 	}
@@ -44,7 +45,7 @@ func (r *Repository) NewBook(book entity.Books) (entity.Books, error) {
 func (r *Repository) FindBookID(bookID string) (entity.Books, error) {
 	var book entity.Books
 
-	if err := r.db.Where("id = ?", bookID).Preload("BookDetail").Find(&book).Error; err != nil {
+	if err := r.db.Where("id = ?", bookID).Find(&book).Error; err != nil {
 		return book, err
 	}
 
@@ -64,6 +65,21 @@ func (r *Repository) UpdateBook(bookID string, dataUpdate map[string]interface{}
 
 	return book, nil
 }
+
+func (r *Repository) UpdateBookFile(bookID string, dataUpdate map[string]interface{}) (entity.Books, error) {
+	var book entity.Books
+
+	if err := r.db.Model(&book).Where("id = ?", bookID).Updates(dataUpdate).Error; err != nil {
+		return book, err
+	}
+
+	if err := r.db.Where("id = ?", bookID).Find(&book).Error; err != nil {
+		return book, err
+	}
+
+	return book, nil
+}
+
 
 func (r *Repository) DeleteBook(bookID string) (string, error) {
 	if err := r.db.Where("id = ?", bookID).Delete(&entity.Books{}).Error; err != nil {

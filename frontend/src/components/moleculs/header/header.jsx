@@ -3,13 +3,13 @@ import React from "react";
 const Header = () => {
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-          <a class="navbar-brand" href="/">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white">
+        <div className="container">
+          <a className="navbar-brand" href="/">
             Go-Lib
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -17,21 +17,29 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <div
-            class="collapse navbar-collapse justify-content-end"
+            className="collapse navbar-collapse justify-content-end"
             id="navbarNav"
           >
-            <ul class="navbar-nav">
-              <li class="Login">
-                <a class="nav-link active" aria-current="page" href="/">
+            <ul className="navbar-nav">
+              <li className="Login">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/login"
+                >
                   Login
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/register"
+                >
                   Register
                 </a>
               </li>
