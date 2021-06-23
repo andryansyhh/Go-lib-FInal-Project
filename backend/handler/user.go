@@ -5,7 +5,6 @@ import (
 	"golib/entity"
 	"golib/helper"
 	"golib/user"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -100,16 +99,16 @@ func (h *userHandler) UpdateUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	idParam, _ := strconv.Atoi(id)
+	// idParam, _ := strconv.Atoi(id)
 
-	userData := int(c.MustGet("currentUser").(int))
+	// userData := int(c.MustGet("currentUser").(int))
 
-	if idParam != userData {
-		responseError := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "user ID not authorize"})
+	// if idParam != userData {
+	// 	responseError := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "user ID not authorize"})
 
-		c.JSON(401, responseError)
-		return
-	}
+	// 	c.JSON(401, responseError)
+	// 	return
+	// }
 
 	user, err := h.userService.UpdateUserByID(id, updateUserInput)
 	if err != nil {

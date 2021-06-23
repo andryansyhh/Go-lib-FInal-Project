@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"fmt"
 	"golib/book"
 	"golib/entity"
 	"golib/helper"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -45,18 +47,54 @@ func (h *bookHandler) ShowBookDetailByID(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-func (h *bookHandler) CreateBookHandler(c *gin.Context) {
-	var bookInput entity.BookInput
+// func (h *bookHandler) CreateBookHandler(c *gin.Context) {
+// 	var bookInput entity.BookInput
 
-	if err := c.ShouldBindJSON(&bookInput); err != nil {
-		splitError := helper.SplitErrorInformation(err)
-		responseError := helper.APINewResponse(400, "Input data required", gin.H{"errors": splitError})
+// 	if err := c.ShouldBindJSON(&bookInput); err != nil {
+// 		splitError := helper.SplitErrorInformation(err)
+// 		responseError := helper.APINewResponse(400, "Input data required", gin.H{"errors": splitError})
+
+// 		c.JSON(400, responseError)
+// 		return
+// 	}
+
+// 	response, err := h.bookService.SaveNewBook(bookInput)
+// 	if err != nil {
+// 		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+// 		c.JSON(500, responseError)
+// 		return
+// 	}
+
+func (h *bookHandler) CreateBookHandler(c *gin.Context) {
+	// var bookInput entity.BookInput
+	title := c.PostForm("title")
+	urlVideo := c.PostForm("url_video")
+	categoryID := c.PostForm("category_id")
+	file, err := c.FormFile("file")
+
+	if err != nil {
+		responseError := helper.APINewResponse(400, "Input data error", gin.H{"error": err.Error()})
 
 		c.JSON(400, responseError)
 		return
 	}
 
-	response, err := h.bookService.SaveNewBook(bookInput)
+	path := fmt.Sprintf("file/%s", file.Filename)
+
+	err = c.SaveUploadedFile(file, path)
+
+	if err != nil {
+		responseError := helper.APINewResponse(400, "Status bad request", gin.H{"error": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	pathFileSave := "https://go-lib.herokuapp.com/" + path
+	categoryIDConv, _ := strconv.Atoi(categoryID)
+	book, err := h.bookService.SaveNewBook(title, urlVideo, pathFileSave, categoryIDConv)
+
 	if err != nil {
 		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
 
@@ -64,8 +102,8 @@ func (h *bookHandler) CreateBookHandler(c *gin.Context) {
 		return
 	}
 
-	newResponse := helper.APINewResponse(200, "Success", response)
-	c.JSON(201, newResponse)
+	response := helper.APINewResponse(200, "Success", book)
+	c.JSON(200, response)
 }
 
 func (h *bookHandler) UpdateBookByIDHandler(c *gin.Context) {
@@ -91,6 +129,43 @@ func (h *bookHandler) UpdateBookByIDHandler(c *gin.Context) {
 	}
 
 	response := helper.APINewResponse(200, "Success", updateBook)
+	c.JSON(200, response)
+}
+
+func (h *bookHandler) UpdateFileByIDHandler(c *gin.Context) {
+	bookID := c.Param("id")
+
+	file, err := c.FormFile("file")
+
+	if err != nil {
+		responseError := helper.APINewResponse(400, "Input data error", gin.H{"error": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	path := fmt.Sprintf("file/%s", file.Filename)
+
+	err = c.SaveUploadedFile(file, path)
+
+	if err != nil {
+		responseError := helper.APINewResponse(400, "Status bad request", gin.H{"error": err.Error()})
+
+		c.JSON(400, responseError)
+		return
+	}
+
+	pathFileSave := "https://go-lib.herokuapp.com/" + path
+	book, err := h.bookService.UpdateFileByID(pathFileSave, bookID)
+
+	if err != nil {
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APINewResponse(200, "Success", book)
 	c.JSON(200, response)
 }
 
