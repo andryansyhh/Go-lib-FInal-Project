@@ -6,6 +6,7 @@ import Header from "./components/moleculs/header/header";
 import Footer from "./components/moleculs/footer/footer";
 import AdminRoutes from "./components/routes/admin/AdminRoutes";
 import ContentPage from "./components/moleculs/pages/ContentPage";
+import LandingPage from "./components/moleculs/pages/LandingPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/news" exact component={ContentPage} />
+          <Route path="/landingpage" exact component={LandingPage} />
           <AdminRoutes />
         </Switch>
       </Router>
