@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../footer/footer";
 import Header from "../header/header";
+import landingPict from "../../../assets/landingpict.jpg";
 
 function LandingPage() {
   return (
@@ -11,13 +12,19 @@ function LandingPage() {
           <div className="row align-items-center ">
             <div className="col-sm">
               <div className="row">
-                <h1 className="title">AYO DONG BELAJAR</h1>
+                <h1 className="title">
+                  “No matter how busy you may think you are, you must find time
+                  for reading, or surrender yourself to self-chosen ignorance.”
+                </h1>
+                <p>― Atwood H. Townsend</p>
                 <button type="button" class="btn btn-primary">
                   Primary
                 </button>
               </div>
             </div>
-            <div className="col-sm"></div>
+            <div className="col-sm">
+              {/* <img src={landingPict} alt="" /> */}
+            </div>
           </div>
         </div>
       </div>
