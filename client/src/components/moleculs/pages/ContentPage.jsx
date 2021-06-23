@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import contentAction from "../../../redux/content/contentAction";
-import Footer from "../footer/footer";
-import Header from "../header/header";
 import { Card, Button } from "react-bootstrap";
 import noImage from "../../../assets/noimage.png";
 import styled from "styled-components";
@@ -44,7 +42,6 @@ const ContentPage = () => {
 
   return (
     <>
-      <Header />
       {Object.keys(contentData).length === 0 ? (
         <div className="d-flex justify-content-center align-items-center vh-100">
           <Spinner animation="border" role="status">
@@ -137,8 +134,6 @@ const ContentPage = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </>
   );
 };
