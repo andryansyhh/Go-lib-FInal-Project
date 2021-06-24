@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminRoutes from "./components/routes/admin/AdminRoutes";
 import ContentPage from "./components/moleculs/pages/ContentPage";
 import LandingPage from "./components/moleculs/pages/LandingPage";
+import DetailCategoriPage from "./components/moleculs/pages/DetailCategoriPage";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/detailPage">
+            <DetailCategoriPage />
           </Route>
           <Route path="/news" exact component={ContentPage} />
           <Route path="/" exact component={LandingPage} />

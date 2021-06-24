@@ -32,7 +32,7 @@ export const loginUser = (payload) => {
                 data : payload,
             })
 
-            localStorage.setItem("access_token", data.authorization)
+            localStorage.setItem("access_token", data.data.token)
 
             console.log(data)
 
