@@ -5,6 +5,7 @@ import Header from "../header/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../../../redux/user/userAction";
+import imageLogin from "../../../assets/Login-amico.svg";
 
 const Login = () => {
   const history = useHistory();
@@ -33,38 +34,50 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="container d-flex justify-content-center">
-        <Form className="col-4 mt-5" onSubmit={loginSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              onChange={(e) => {
-                e.preventDefault();
-                setEmail(e.target.value);
-              }}
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              onChange={(e) => {
-                e.preventDefault();
-                setPass(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formButton">
-            <Form.Control
-              className="btn btn-primary"
-              type="submit"
-              value="Login"
-            />
-          </Form.Group>
-        </Form>
+      <div className="container-fluid page-container">
+        <div className="container">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-sm">
+              <div className="img-container">
+                <img src={imageLogin} alt="" />
+              </div>
+            </div>
+            <div className="col-sm form-container">
+              <Form className="" onSubmit={loginSubmit}>
+                <Form.Group className="" controlId="formBasicEmail">
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  <Form.Text className="text-muted"></Form.Text>
+                </Form.Group>
+
+                <Form.Group className="" controlId="formBasicPassword">
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setPass(e.target.value);
+                    }}
+                  />
+                </Form.Group>
+                <Form.Group className="" controlId="formButton">
+                  <Form.Control
+                    className="btn btn-primary"
+                    type="submit"
+                    value="Login"
+                  />
+                </Form.Group>
+              </Form>
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </>

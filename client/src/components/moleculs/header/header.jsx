@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const history = useHistory();
@@ -12,10 +13,11 @@ const Header = () => {
             onClick={() => {
               history.push("/");
             }}
-            className="navbar-brand pe-auto navname"
+            className="navbar-brand navname"
           >
-            Go-Lib
+            <h2>Go-Lib</h2>
           </div>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -32,26 +34,50 @@ const Header = () => {
             className="collapse navbar-collapse justify-content-end"
             id="navbarNav"
           >
-            <ul className="navbar-nav navlogin">
-              <li
-                onClick={() => {
-                  history.push("/login");
-                }}
-                className="Login pe-auto"
-              >
-                <div className="nav-link active" aria-current="page">
-                  Login
-                </div>
+            <ul className="navbar-nav">
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/home");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  Home
+                </Link>
+              </li>{" "}
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/news");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  News
+                </Link>
               </li>
-              <li
-                onClick={() => {
-                  history.push("/register");
-                }}
-                className="nav-item navregis"
-              >
-                <div className="nav-link active" aria-current="page">
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/login");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/register");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
                   Register
-                </div>
+                </Link>
               </li>
             </ul>
           </div>
