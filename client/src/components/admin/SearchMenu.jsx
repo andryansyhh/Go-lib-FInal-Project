@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, FormControl, InputGroup } from "react-bootstrap";
-import style from "./user/styles.css";
+import "./user/styles.css";
 import searchIcon from "../../assets/search-icon.svg";
 
 const SearchMenu = () => {

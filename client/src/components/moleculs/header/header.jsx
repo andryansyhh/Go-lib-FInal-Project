@@ -1,24 +1,23 @@
 import React from "react";
 import { useHistory } from "react-router";
-import Footer from "../footer/footer";
 
 const Header = () => {
   const history = useHistory();
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white">
+        <div className="container">
           <div
             onClick={() => {
               history.push("/");
             }}
-            class="navbar-brand pe-auto navname"
+            className="navbar-brand pe-auto navname"
           >
             Go-Lib
           </div>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -26,21 +25,21 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           <div
-            class="collapse navbar-collapse justify-content-end"
+            className="collapse navbar-collapse justify-content-end"
             id="navbarNav"
           >
-            <ul class="navbar-nav navlogin">
+            <ul className="navbar-nav navlogin">
               <li
                 onClick={() => {
                   history.push("/login");
                 }}
-                class="Login pe-auto"
+                className="Login pe-auto"
               >
-                <div class="nav-link active" aria-current="page">
+                <div className="nav-link active" aria-current="page">
                   Login
                 </div>
               </li>
@@ -48,9 +47,9 @@ const Header = () => {
                 onClick={() => {
                   history.push("/register");
                 }}
-                class="nav-item navregis"
+                className="nav-item navregis"
               >
-                <div class="nav-link active" aria-current="page">
+                <div className="nav-link active" aria-current="page">
                   Register
                 </div>
               </li>
