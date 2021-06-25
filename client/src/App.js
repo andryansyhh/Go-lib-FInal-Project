@@ -28,6 +28,7 @@ function App() {
           <Route path="/news" exact component={ContentPage} />
           <Route path="/" exact component={LandingPage} />
           <AdminRoutes />
+          {/* <Route component={NotFound} /> */}
         </Switch>
       </Router>
     </div >

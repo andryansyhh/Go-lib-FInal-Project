@@ -184,3 +184,18 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 	response := helper.APINewResponse(200, "Success", book)
 	c.JSON(200, response)
 }
+
+func (h *bookHandler) LengthBookHandler(c *gin.Context) {
+	length, err := h.bookService.LengthAllBooks()
+
+	if err != nil {
+		responseError := helper.APINewResponse(500, "Internal server error", gin.H{"error": err.Error()})
+
+		c.JSON(500, responseError)
+		return
+	}
+
+	response := helper.APINewResponse(200, "Success", length)
+	c.JSON(200, response)
+
+}

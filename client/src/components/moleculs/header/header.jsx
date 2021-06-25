@@ -7,7 +7,7 @@ import { logoutUser } from "../../../redux/user/userAction";
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const accessToken = localStorage.getItem("access_token");
+  const accessToken = localStorage.getItem("accessToken");
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -66,7 +66,7 @@ const Header = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       dispatch(logoutUser());
-                      history.push("/");
+                      history.push("/login");
                     }}
                     className="nav-link active"
                     aria-current="page"

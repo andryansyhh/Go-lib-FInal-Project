@@ -21,4 +21,5 @@ func BooksRoute(r *gin.Engine) {
 	r.PUT("/books/:id", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), bookHandler.UpdateBookByIDHandler)
 	r.PUT("/books/file/:id", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), bookHandler.UpdateFileByIDHandler)
 	r.DELETE("/books/:id", handler.Middleware(userService, authService), handler.AdminMiddleware(userRepository), bookHandler.DeleteBookHandler)
+	r.GET("/books/all", bookHandler.LengthBookHandler)
 }
