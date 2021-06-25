@@ -1,6 +1,6 @@
 import golibAPI from "../../../API/go-lib"
 
-const access_token = !localStorage.getItem("access_token") ? "" : localStorage.getItem("access_token")
+const access_token = !localStorage.getItem("accessToken") ? "" : localStorage.getItem("accessToken")
 
 export const fetchBooks = () => {
   return async (dispatch) => {

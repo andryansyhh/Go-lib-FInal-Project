@@ -15,19 +15,20 @@ type BookService interface {
 	UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error)
 	UpdateFileByID(pathFile, bookID string) (BookFormat, error)
 	DeleteBookByID(bookID string) (interface{}, error)
+	LengthAllBooks() (interface{}, error)
 }
 
 type bookService struct {
-	reposirtory Repository
+	repository Repository
 }
 
-func NewBookService(reposirtory Repository) *bookService {
-	return &bookService{reposirtory}
+func NewBookService(repository Repository) *bookService {
+	return &bookService{repository}
 }
 
 func (s *bookService) GetAllBook() ([]BookFormat, error) {
 
-	books, err := s.reposirtory.GetAll()
+	books, err := s.repository.GetAll()
 
 	var booksFormat []BookFormat
 
@@ -49,7 +50,7 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 		return BookFormat{}, err
 	}
 
-	book, err := s.reposirtory.FindBookID(bookID)
+	book, err := s.repository.FindBookID(bookID)
 
 	if err != nil {
 		return BookFormat{}, err
@@ -73,7 +74,7 @@ func (s *bookService) SaveNewBook(title, urlVideo, urlFile string, categoryID in
 		UrlFile: 		urlFile,
 	}
 
-	createBook, err := s.reposirtory.NewBook(newBook)
+	createBook, err := s.repository.NewBook(newBook)
 	formatBook := FormatBook(createBook)
 
 	if err != nil {
@@ -91,7 +92,7 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookI
 		return BookFormat{}, err
 	}
 
-	book, err := s.reposirtory.FindBookID(bookID)
+	book, err := s.repository.FindBookID(bookID)
 
 	if err != nil {
 		return BookFormat{}, err
@@ -114,7 +115,7 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookI
 	}
 	dataUpdate["updated_at"] = time.Now()
 
-	bookUpdated, err := s.reposirtory.UpdateBook(bookID, dataUpdate)
+	bookUpdated, err := s.repository.UpdateBook(bookID, dataUpdate)
 
 	if err != nil {
 		return BookFormat{}, err
@@ -133,7 +134,7 @@ func (s *bookService) UpdateFileByID(pathFile, bookID string) (BookFormat, error
 		return BookFormat{}, err
 	}
 
-	book, err := s.reposirtory.FindBookID(bookID)
+	book, err := s.repository.FindBookID(bookID)
 
 	if err != nil {
 		return BookFormat{}, err
@@ -151,7 +152,7 @@ func (s *bookService) UpdateFileByID(pathFile, bookID string) (BookFormat, error
 
 	dataUpdate["updated_at"] = time.Now()
 
-	bookUpdated, err := s.reposirtory.UpdateBook(bookID, dataUpdate)
+	bookUpdated, err := s.repository.UpdateBook(bookID, dataUpdate)
 
 	if err != nil {
 		return BookFormat{}, err
@@ -168,7 +169,7 @@ func (s *bookService) DeleteBookByID(bookID string) (interface{}, error) {
 		return BookFormat{}, err
 	}
 
-	book, err := s.reposirtory.FindBookID(bookID)
+	book, err := s.repository.FindBookID(bookID)
 
 	if err != nil {
 		return nil, err
@@ -179,7 +180,7 @@ func (s *bookService) DeleteBookByID(bookID string) (interface{}, error) {
 		return nil, errors.New(newError)
 	}
 
-	status, err := s.reposirtory.DeleteBook(bookID)
+	status, err := s.repository.DeleteBook(bookID)
 
 	if err != nil {
 		return nil, err
@@ -193,4 +194,14 @@ func (s *bookService) DeleteBookByID(bookID string) (interface{}, error) {
 	formatDelete := FormatDeleteBook(msg)
 
 	return formatDelete, nil
+}
+
+func (s *bookService) LengthAllBooks() (interface{}, error) {
+	length, err := s.repository.LengthBook()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return length, nil
 }

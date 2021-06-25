@@ -55,7 +55,7 @@ const ContentPage = () => {
         <div className="container">
           <h3>Programming Content</h3>
           <div className="d-flex justify-content-between">
-            <Button size="sm" href="#">
+            <Button size="sm" href="/">
               Back to Landing
             </Button>
             <div>
