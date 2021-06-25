@@ -3,6 +3,7 @@ package main
 import (
 	"golib/handler"
 	"golib/routes"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,5 +18,7 @@ func main() {
 	routes.BooksRoute(r)
 	routes.BookDetailRoute(r)
 	routes.ContentRoute(r)
-	r.Run()
+
+	port := os.Getenv("PORT")
+	r.Run(":" + port)
 }
