@@ -112,7 +112,9 @@ function UpdateBook() {
                   variant="primary"
                   type="submit"
                   disabled={
-                    !!!title && !!!urlVideo && !!!categoryID ? true : false
+                    !!!title && !!!urlVideo && !!!categoryID && !!!file
+                      ? true
+                      : false
                   }
                 >
                   {isLoading ? "Loading..." : "Update"}
