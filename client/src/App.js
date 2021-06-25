@@ -6,14 +6,17 @@ import AdminRoutes from "./components/routes/admin/AdminRoutes";
 import ContentPage from "./components/moleculs/pages/ContentPage";
 import LandingPage from "./components/moleculs/pages/LandingPage";
 import DetailCategoriPage from "./components/moleculs/pages/DetailCategoriPage";
+import DetailBookPage from "./components/moleculs/pages/DetailBookPage";
 import HomePage from "./components/moleculs/pages/HomePage";
-import NotFound from "./components/moleculs/pages/NotFound";
 
 function App() {
   return (
     <div className="App position-relative">
       <Router>
         <Switch>
+          <Route path="/home">
+            <HomePage/>
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
@@ -23,12 +26,15 @@ function App() {
           <Route path="/detailPage">
             <DetailCategoriPage />
           </Route>
+          <Route path="/detailbookpage">
+            <DetailBookPage />
+          </Route>
           <Route path="/home" exact component={HomePage} />
 
           <Route path="/news" exact component={ContentPage} />
           <Route path="/" exact component={LandingPage} />
           <AdminRoutes />
-          <Route component={NotFound} />
+          {/* <Route component={NotFound} /> */}
         </Switch>
       </Router>
     </div >
