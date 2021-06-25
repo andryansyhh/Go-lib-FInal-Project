@@ -39,7 +39,7 @@ const Register = () => {
             <div className="col-sm">
               <div className="img-container">
                 <img src={imageRegis} alt="" />
-              </div>{" "}
+              </div>
             </div>
             <div className="col-sm form-container">
               <Form className="" onSubmit={registerSubmit}>
