@@ -7,12 +7,16 @@ import ContentPage from "./components/moleculs/pages/ContentPage";
 import LandingPage from "./components/moleculs/pages/LandingPage";
 import DetailCategoriPage from "./components/moleculs/pages/DetailCategoriPage";
 import DetailBookPage from "./components/moleculs/pages/DetailBookPage";
+import HomePage from "./components/moleculs/pages/HomePage";
 
 function App() {
   return (
     <div className="App position-relative">
       <Router>
         <Switch>
+          <Route path="/home">
+            <HomePage/>
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
