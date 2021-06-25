@@ -7,6 +7,7 @@ import ContentPage from "./components/moleculs/pages/ContentPage";
 import LandingPage from "./components/moleculs/pages/LandingPage";
 import DetailCategoriPage from "./components/moleculs/pages/DetailCategoriPage";
 import DetailBookPage from "./components/moleculs/pages/DetailBookPage";
+import HomePage from "./components/moleculs/pages/HomePage";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
           <Route path="/detailbookpage">
             <DetailBookPage />
           </Route>
+          <Route path="/home" exact component={HomePage} />
+
           <Route path="/news" exact component={ContentPage} />
           <Route path="/" exact component={LandingPage} />
           <AdminRoutes />
