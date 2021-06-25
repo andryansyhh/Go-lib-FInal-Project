@@ -14,6 +14,9 @@ function App() {
     <div className="App position-relative">
       <Router>
         <Switch>
+          <Route path="/home">
+            <HomePage/>
+          </Route>
           <Route path="/register">
             <Register />
           </Route>
