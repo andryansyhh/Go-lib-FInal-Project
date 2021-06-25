@@ -13,6 +13,7 @@ type BookRepository interface {
 	UpdateBook(bookID string, dataUpdate map[string]interface{}) (entity.Books, error)
 	UpdateBookFile(bookID string, dataUpdate map[string]interface{}) (entity.Books, error)
 	DeleteBook(bookID string) (string, error)
+	LengthBook() (int, error)
 }
 
 type Repository struct {
@@ -87,4 +88,13 @@ func (r *Repository) DeleteBook(bookID string) (string, error) {
 	}
 
 	return "success", nil
+}
+
+func (r *Repository) LengthBook() (int, error) {
+	var Book []entity.Books
+
+	result := r.db.Find(&Book)
+	length := result.RowsAffected
+
+	return int(length), nil
 }
