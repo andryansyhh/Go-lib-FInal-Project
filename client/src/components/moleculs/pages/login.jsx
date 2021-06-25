@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Figure } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Form, Alert } from "react-bootstrap";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,13 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const { error } = useSelector((state) => state.user);
+  const { error, isLoading } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!!localStorage.getItem("accessToken")) {
+      history.push("/home");
+    }
+  }, []);
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -22,13 +28,14 @@ const Login = () => {
       email: email,
       password: pass,
     };
+    dispatch(loginUser(data, history));
 
-    console.log(data);
+    // console.log(data);
 
-    if (!error) {
-      dispatch(loginUser(data));
-      history.push("/");
-    }
+    // if (!error) {
+    //   dispatch(loginUser(data));
+    //   history.push("/");
+    // }
   };
 
   return (
@@ -44,11 +51,13 @@ const Login = () => {
               </div>
             </div>
             <div className="col-sm form-container">
+              {error && <Alert variant="danger">{error}</Alert>}
               <Form className="" onSubmit={loginSubmit}>
                 <Form.Group className="" controlId="formBasicEmail">
                   <Form.Control
                     type="email"
                     placeholder="Enter email"
+                    required
                     onChange={(e) => {
                       e.preventDefault();
                       setEmail(e.target.value);
@@ -61,6 +70,7 @@ const Login = () => {
                   <Form.Control
                     type="password"
                     placeholder="Password"
+                    required
                     onChange={(e) => {
                       e.preventDefault();
                       setPass(e.target.value);
@@ -71,7 +81,8 @@ const Login = () => {
                   <Form.Control
                     className="btn btn-primary"
                     type="submit"
-                    value="Login"
+                    value={isLoading ? "Loading..." : "Login"}
+                    disabled={isLoading ? true : false}
                   />
                 </Form.Group>
               </Form>
