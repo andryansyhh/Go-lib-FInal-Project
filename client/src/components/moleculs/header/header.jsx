@@ -1,9 +1,13 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../redux/user/userAction";
 
 const Header = () => {
   const history = useHistory();
-
+  const dispatch = useDispatch();
+  const accessToken = localStorage.getItem("access_token");
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -12,10 +16,11 @@ const Header = () => {
             onClick={() => {
               history.push("/");
             }}
-            className="navbar-brand pe-auto navname"
+            className="navbar-brand navname"
           >
-            Go-Lib
+            <h2>Go-Lib</h2>
           </div>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -32,27 +37,69 @@ const Header = () => {
             className="collapse navbar-collapse justify-content-end"
             id="navbarNav"
           >
-            <ul className="navbar-nav navlogin">
-              <li
-                onClick={() => {
-                  history.push("/login");
-                }}
-                className="Login pe-auto"
-              >
-                <div className="nav-link active" aria-current="page">
-                  Login
-                </div>
+            <ul className="navbar-nav">
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/home");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  Home
+                </Link>
+              </li>{" "}
+              <li>
+                <Link
+                  onClick={() => {
+                    history.push("/news");
+                  }}
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  News
+                </Link>
               </li>
-              <li
-                onClick={() => {
-                  history.push("/register");
-                }}
-                className="nav-item navregis"
-              >
-                <div className="nav-link active" aria-current="page">
-                  Register
-                </div>
-              </li>
+              {accessToken ? (
+                <li>
+                  <Link
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(logoutUser());
+                      history.push("/");
+                    }}
+                    className="nav-link active"
+                    aria-current="page"
+                  >
+                    Logout
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      onClick={() => {
+                        history.push("/login");
+                      }}
+                      className="nav-link active"
+                      aria-current="page"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={() => {
+                        history.push("/register");
+                      }}
+                      className="nav-link active"
+                      aria-current="page"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
