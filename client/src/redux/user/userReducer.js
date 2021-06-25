@@ -2,6 +2,7 @@ const initState = {
   user: null,
   isLoading: false,
   error: null,
+  success: null,
 };
 
 const userReducer = (state = initState, action) => {
@@ -13,10 +14,12 @@ const userReducer = (state = initState, action) => {
     case "USER_LOGIN":
       return { ...state, user: action.payload, isLoading: false };
     case "LOGOUT_USER":
-      localStorage.removeItem("access_token");
+      localStorage.removeItem("accessToken");
       return { ...state, user: null };
     case "USER_ERROR":
       return { ...state, error: action.payload, isLoading: false };
+    case "USER_SUCCESS":
+      return { ...state, success: action.payload, isLoading: false };
     default:
       return state;
   }
