@@ -5,7 +5,7 @@ import { fetchOneBook } from "../../../redux/admin/book/adminBookAction";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import Loading from "../spinner/Spinner";
-import { ResponsiveEmbed, Button, Modal } from "react-bootstrap"
+import { ResponsiveEmbed, Button, Modal } from "react-bootstrap";
 
 const DetailFile = () => {
   const dispatch = useDispatch();
@@ -21,14 +21,13 @@ const DetailFile = () => {
     dispatch(fetchOneBook(bookID));
   }, []);
 
-
   return (
     <>
       <Header />
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="container vh-100">
+        <div className="container">
           {book && (
             <>
               <div className="row justify-content-between">
@@ -43,7 +42,7 @@ const DetailFile = () => {
                   </button>
                 </div>
               </div>
-              <div className="row vh-100">
+              <div className="row">
                 <h3 className="text-center">{book.data.title}</h3>
                 <div className="mb-2">
                   <Button
@@ -58,7 +57,7 @@ const DetailFile = () => {
                     className="embed-responsive-item mb-3"
                     allowFullScreen
                     title="file"
-                    src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
+                    src={`https://docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
                     // src={book.data.url_file}
                   />
                 </div>
@@ -66,17 +65,24 @@ const DetailFile = () => {
                   dangerouslySetInnerHTML={{ __html: book.data.url_video }}
                 ></div> */}
 
-            <Button className="mt-3" onClick={() => setLgShow(true)}>Watch Video</Button>
+                <button
+                  className=" btn btn-primary mt-3 mb-5 p-3"
+                  onClick={() => setLgShow(true)}
+                >
+                  Watch Video
+                </button>
                 <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    centered
-                  >
+                  size="lg"
+                  show={lgShow}
+                  onHide={() => setLgShow(false)}
+                  centered
+                >
                   <Modal.Header closeButton>
                     <div className="mx-auto embed-responsive embed-responsive-16by9">
-                      <div 
-                        dangerouslySetInnerHTML={{ __html: book.data.url_video }}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: book.data.url_video,
+                        }}
                       ></div>
                     </div>
                   </Modal.Header>

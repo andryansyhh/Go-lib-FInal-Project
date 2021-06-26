@@ -20,7 +20,7 @@ const Header = () => {
               }}
               className="navbar-brand navname"
             >
-              <img className="imglogo" src={logo} alt="" />
+              <img className="" src={logo} alt="" />
             </div>
 
             <button

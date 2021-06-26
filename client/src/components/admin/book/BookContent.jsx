@@ -58,7 +58,7 @@ const BookContent = () => {
             </Button>
           </div>
           <div className="container">
-            <Table responsive="sm" striped bordered hover>
+            <table className="table table-striped table-bordered table-responsive-xl">
               <thead>
                 <tr>
                   <th>#</th>
@@ -137,7 +137,7 @@ const BookContent = () => {
                     );
                   })}
               </tbody>
-            </Table>
+            </table>
             <div className="d-flex justify-content-end">
               <Pagination
                 usersPerPage={usersPerPage}

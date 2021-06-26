@@ -12,6 +12,8 @@ import { Spinner, Button } from "react-bootstrap";
 import { fetchLengthCategories } from "../../../redux/admin/category/adminCategoryAction";
 import Loading from "../spinner/Spinner";
 import { fetchLengthBooks } from "../../../redux/admin/book/adminBookAction";
+import file from "../../../assets/file.png";
+import category from "../../../assets/category.png";
 
 function LandingPage() {
   const contentData = useSelector((state) => state.content);
@@ -28,6 +30,8 @@ function LandingPage() {
 
   const NewCard = styled.div`
     border-radius: 4px;
+    min-height: 380px;
+    max-height: 380px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
     transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
@@ -44,7 +48,7 @@ function LandingPage() {
       <Header />
       <div className="container-fluid  section1-container">
         <div className="container">
-          <div className="row align-items-center ">
+          <div className="row align-items-center mt-5">
             <div className="col-sm">
               <div className="row">
                 <h1>
@@ -67,7 +71,7 @@ function LandingPage() {
             <div className="col-sm">
               <div className="img-container">
                 <img
-                  className="img-fluid img-landing"
+                  className="img-fluid d-sm-none d-md-inline-block"
                   src={learningbro}
                   alt=""
                 />
@@ -77,20 +81,24 @@ function LandingPage() {
         </div>
       </div>
 
-      <div className="container-fluid  page-container section2-container">
-        <div className="container">
+      <div className="container-fluid  page-container section2-container py-5 mb-3">
+        <div className="container py-5">
           {isLoading ? (
             <Loading />
           ) : (
             <div className="row ">
               {length.data && (
                 <div className="col-sm text-center">
-                  {length.data}+ Categories
+                  <img src={category} alt="" width="100px" className="mb-3" />{" "}
+                  <br />
+                  <h5>{length.data}+ Categories</h5>
                 </div>
               )}
               {lengthBooks.data && (
                 <div className="col-sm text-center">
-                  {lengthBooks.data}+ Files
+                  <img src={file} alt="" width="100px" className="mb-3" />{" "}
+                  <br />
+                  <h5>{lengthBooks.data}+ Files</h5>
                 </div>
               )}
             </div>
@@ -113,61 +121,62 @@ function LandingPage() {
                   </div>
                 ) : (
                   <div className="col-sm d-flex justify-content-center">
-                    {contentData &&
-                      contentData.data.articles
-                        .slice(0, 4)
-                        .map((data, index) => {
-                          return (
-                            <NewCard
-                              style={{ width: "15rem", margin: "2rem" }}
-                              key={index}
-                            >
-                              <a
-                                href={data.url}
-                                className="text-decoration-none"
-                                target="_blank"
-                              >
-                                <Card.Img
-                                  variant="top"
-                                  src={data.urlToImage || noImage}
-                                  style={{
-                                    maxHeight: "25vh",
-                                    minHeight: "25vh",
-                                    padding: "1rem",
-                                  }}
-                                />
-                                <Card.Body
-                                  className="text-left"
-                                  style={{ fontSize: "0.8rem" }}
-                                >
-                                  <Card.Title
-                                    style={{
-                                      fontSize: "1rem",
-                                      display: "-webkit-box",
-                                      WebkitBoxOrient: "vertical",
-                                      WebkitLineClamp: "5",
-                                      overflow: "hidden",
-                                      textAlign: "justify",
-                                    }}
+                    <div className="row">
+                      {contentData &&
+                        contentData.data.articles
+                          .slice(0, 4)
+                          .map((data, index) => {
+                            return (
+                              <div className="col-6 col-md-4 col-xl-3 mb-3">
+                                <NewCard key={index}>
+                                  <a
+                                    href={data.url}
+                                    className="text-decoration-none"
+                                    target="_blank"
                                   >
-                                    {data.title}
-                                  </Card.Title>
-                                  <Card.Text
-                                    style={{
-                                      display: "-webkit-box",
-                                      WebkitBoxOrient: "vertical",
-                                      WebkitLineClamp: "2",
-                                      overflow: "hidden",
-                                      color: "black",
-                                    }}
-                                  >
-                                    {data.description}
-                                  </Card.Text>
-                                </Card.Body>
-                              </a>
-                            </NewCard>
-                          );
-                        })}
+                                    <Card.Img
+                                      variant="top"
+                                      src={data.urlToImage || noImage}
+                                      style={{
+                                        maxHeight: "20vh",
+                                        minHeight: "20vh",
+                                        padding: "1rem",
+                                      }}
+                                    />
+                                    <Card.Body
+                                      className="text-left"
+                                      style={{ fontSize: "0.8rem" }}
+                                    >
+                                      <Card.Title
+                                        style={{
+                                          fontSize: "1rem",
+                                          display: "-webkit-box",
+                                          WebkitBoxOrient: "vertical",
+                                          WebkitLineClamp: "5",
+                                          overflow: "hidden",
+                                          textAlign: "justify",
+                                        }}
+                                      >
+                                        {data.title}
+                                      </Card.Title>
+                                      <Card.Text
+                                        style={{
+                                          display: "-webkit-box",
+                                          WebkitBoxOrient: "vertical",
+                                          WebkitLineClamp: "2",
+                                          overflow: "hidden",
+                                          color: "black",
+                                        }}
+                                      >
+                                        {data.description}
+                                      </Card.Text>
+                                    </Card.Body>
+                                  </a>
+                                </NewCard>
+                              </div>
+                            );
+                          })}
+                    </div>
                   </div>
                 )}
                 <div className="text-center">

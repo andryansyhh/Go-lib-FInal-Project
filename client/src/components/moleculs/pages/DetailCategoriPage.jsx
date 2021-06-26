@@ -45,7 +45,7 @@ const DetailCategoriPage = () => {
           </div>
         </div>
         <div className="row justify-content-between">
-          <div className="col-3">
+          <div className="col-5 col-md-3">
             <button
               className="btn btn-primary text-light"
               onClick={() => {
@@ -55,7 +55,7 @@ const DetailCategoriPage = () => {
               Back to Home
             </button>
           </div>
-          <div className="col-3">
+          <div className="col-7 col-md-5 col-xl-3">
             <form action="">
               <div className="form-row">
                 <div className="col-10">
@@ -85,7 +85,7 @@ const DetailCategoriPage = () => {
               category.data.books.map((data, index) => {
                 return (
                   <div className="col-6 col-md-3 mt-4" key={index}>
-                    <NewCard style={{ width: "10rem" }} key={index}>
+                    <NewCard key={index}>
                       <a
                         href={`/categories/${category.id}`}
                         className="text-decoration-none"
@@ -99,8 +99,7 @@ const DetailCategoriPage = () => {
                           variant="top"
                           src="https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png"
                           style={{
-                            maxHeight: "20vh",
-                            minHeight: "20vh",
+                            minHeight: "150px",
                           }}
                         />
                         <Card.Body
