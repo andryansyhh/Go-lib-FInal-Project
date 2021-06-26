@@ -21,14 +21,12 @@ const DetailCategoriPage = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <h2 className="text-center">List All Books</h2>
+            <h2 className="text-center">List All Category</h2>
           </div>
         </div>
         <div className="row justify-content-between">
           <div className="col-3">
-            <button className="btn btn-primary text-light">
-              Back to Category
-            </button>
+            <button className="btn btn-primary text-light">Back to Home</button>
           </div>
           <div className="col-3">
             <form action="">

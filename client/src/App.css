@@ -33,7 +33,7 @@ h6 {
 }
 
 .section2-container {
-  background-color: #f0f0f0  !important;
+  background-color: #f0f0f0 !important;
 }
 
 .card-container {
@@ -67,6 +67,10 @@ h6 {
 
 .navname {
   cursor: pointer;
+}
+
+.navname img {
+  width: 100px;
 }
 
 @media (max-width: 992px) {

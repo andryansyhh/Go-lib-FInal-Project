@@ -6,10 +6,13 @@ import FolderImage from "../../../assets/folder.png";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../redux/admin/category/adminCategoryAction";
 import Spinner from "../spinner/Spinner";
+import { useHistory } from "react-router";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const { categories, isLoading } = useSelector((state) => state.adminCategory);
+
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -26,8 +29,15 @@ const HomePage = () => {
                 <h1 className="">
                   Welcome user, you can get and learn programming source here
                 </h1>
-                <button use type="button" class="btn btn-primary">
-                  More
+                <button
+                  onClick={() => {
+                    history.push("/categorypage");
+                  }}
+                  use
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  More Category
                 </button>
               </div>
             </div>

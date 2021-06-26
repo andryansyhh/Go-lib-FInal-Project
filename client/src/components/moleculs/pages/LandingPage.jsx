@@ -28,7 +28,7 @@ function LandingPage() {
                 <br />
                 <button
                   onClick={() => {
-                    history.push("/home");
+                    history.push("/login");
                   }}
                   type="button"
                   class="btn btn-primary"
@@ -53,8 +53,18 @@ function LandingPage() {
       <div className="container-fluid  page-container section2-container">
         <div className="container">
           <div className="row ">
-            <div className="col-sm text-center">20+ Katergori</div>
-            <div className="col-sm text-center">80+ Materi</div>
+            <div className="col-sm align-items-center">
+              <div className="row ">
+                <i class="fas fa-folder-open fa-5x"></i>
+              </div>
+              <div className="row text-center">20+ Categories</div>
+            </div>
+            <div className="col-sm align-items-center">
+              <div className="row">
+                <i class="fas fa-book fa-5x"></i>
+              </div>
+              <div className="row text-center">80+ E-books</div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const socMeds = [
   { className: "fab fa-instagram me-3" },
@@ -29,9 +30,11 @@ const Footer = () => {
             </div>
             <div className="row justify-content-start">
               <div className="col">
-                {socMeds.map((socMed) => (
-                  <i className={socMed.className}></i>
-                ))}
+                <Link>
+                  {socMeds.map((socMed) => (
+                    <i className={socMed.className}></i>
+                  ))}
+                </Link>
               </div>
             </div>
           </div>
