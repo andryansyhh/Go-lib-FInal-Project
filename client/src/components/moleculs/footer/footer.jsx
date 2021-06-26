@@ -9,13 +9,13 @@ const socMeds = [
 const Footer = () => {
   return (
     <div className="container-fluid footer-container">
-      <footer className="">
+      <footer className="text-center">
         {/* footer top */}
         <div className="row justify-content-center footer-1">
-          <div className="col-4 d-flex justify-content-center">
+          <div className="col-sm-4 d-flex justify-content-center">
             <h1>Go-Lib</h1>
           </div>
-          <div className="col-4 d-flex justify-content-center flex-column">
+          <div className="col-sm-4 d-flex justify-content-center flex-column">
             <h3>Our Contact</h3>
             <ul className="list-unstyled">
               <li>golib@gmail.com</li>
@@ -23,7 +23,7 @@ const Footer = () => {
               <li>Jakarta Selatan, Indonesia</li>
             </ul>
           </div>
-          <div className="col-4 d-flex justify-content-center align-self-start flex-column">
+          <div className="col-sm-4 d-flex justify-content-center align-self-start flex-column">
             <div className="row">
               <h3>Social Media</h3>
             </div>
