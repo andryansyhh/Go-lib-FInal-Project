@@ -6,7 +6,7 @@
 
 body {
   color: #343a40 !important;
-  background-color: #fffefe;
+  background-color: #fffefef3;
 }
 
 /* h1,
@@ -25,6 +25,7 @@ h6 {
 
 .page-container {
   width: 100vw;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;

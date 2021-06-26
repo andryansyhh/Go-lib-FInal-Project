@@ -81,7 +81,7 @@ function LandingPage() {
         </div>
       </div>
 
-      <div className="container-fluid  page-container section2-container py-5 mb-3">
+      <div className="container-fluid section2-container py-5 mb-3">
         <div className="container py-5">
           {isLoading ? (
             <Loading />
