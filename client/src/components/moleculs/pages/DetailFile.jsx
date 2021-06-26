@@ -52,30 +52,31 @@ const DetailFile = () => {
                   >
                     Download
                   </Button>
+                  <Button className="btn btn-primary text-light ml-3" onClick={() => setLgShow(true)}>Watch Video</Button>
                 </div>
                 <div className="mx-auto embed-responsive embed-responsive-16by9">
                   <iframe
                     className="embed-responsive-item mb-3"
                     allowFullScreen
                     title="file"
-                    src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
-                    // src={book.data.url_file}
+                    // src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
+                    src={book.data.url_file}
                   />
                 </div>
                 {/* <div
                   dangerouslySetInnerHTML={{ __html: book.data.url_video }}
                 ></div> */}
 
-            <Button className="mt-3" onClick={() => setLgShow(true)}>Watch Video</Button>
+
                 <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    centered
-                  >
+                  size="lg"
+                  show={lgShow}
+                  onHide={() => setLgShow(false)}
+                  centered
+                >
                   <Modal.Header closeButton>
                     <div className="mx-auto embed-responsive embed-responsive-16by9">
-                      <div 
+                      <div
                         dangerouslySetInnerHTML={{ __html: book.data.url_video }}
                       ></div>
                     </div>

@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { Card } from "react-bootstrap";
 import { useHistory } from "react-router";
 import Loading from "../spinner/Spinner";
+import { Spinner, Button } from "react-bootstrap";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ const HomePage = () => {
               ) : (
                 <div className="row justify-content-center">
                   {categories.data &&
-                    categories.data.map((category, index) => {
+                    categories.data.slice(0, 5).map((category, index) => {
                       return (
                         <NewCard
                           style={{ width: "12rem", margin: "1rem" }}
@@ -121,6 +122,11 @@ const HomePage = () => {
                     })}
                 </div>
               )}
+            </div>
+            <div className="text-center">
+              <Button href="/categories" className="btn btn-primary text-light">
+                More Categories
+              </Button>
             </div>
           </div>
         </div>
