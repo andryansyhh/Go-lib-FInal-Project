@@ -13,6 +13,7 @@ const UserContent = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { users, isLoading } = useSelector((state) => state.admin);
+  const { isAdmin } = useSelector((state) => state.user);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [user, setUser] = useState("");
@@ -47,7 +48,10 @@ const UserContent = () => {
           </div>
           <h3 className="mt-1">Users</h3>
           <div className="container-fluid d-flex justify-content-end">
-            <Button href="/admin/users/add" className="mb-2">
+            <Button
+              href="/admin/users/add"
+              className="mb-2 btn btn-primary text-light"
+            >
               Add User
             </Button>
           </div>
@@ -78,7 +82,10 @@ const UserContent = () => {
                         <td>{data.user_name}</td>
                         <td>{data.email}</td>
                         <td>
-                          <Button href={"/admin/users/edit/" + data.id}>
+                          <Button
+                            href={"/admin/users/edit/" + data.id}
+                            className="btn btn-primary text-light"
+                          >
                             Update
                           </Button>
                         </td>
@@ -90,6 +97,7 @@ const UserContent = () => {
                               setUserID(data.id);
                               setUser(data.user_name);
                             }}
+                            className="btn btn-primary text-light"
                           >
                             Delete
                           </Button>

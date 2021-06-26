@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import GoogleButton from "react-google-button";
-import { registerUser } from "../../../redux/user/userAction";
+import { registerUser, resetForm } from "../../../redux/user/userAction";
 import imageRegis from "../../../assets/Mobile-login-pana.svg";
 import { useHistory } from "react-router";
 
@@ -21,6 +21,7 @@ const Register = () => {
   const [pass, setPass] = useState("");
 
   useEffect(() => {
+    dispatch(resetForm());
     if (!!localStorage.getItem("accessToken")) {
       history.push("/");
     }
@@ -34,8 +35,6 @@ const Register = () => {
       email: email,
       password: pass,
     };
-
-    // console.log(data);
 
     dispatch(registerUser(data));
   };

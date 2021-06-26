@@ -4,7 +4,7 @@ import Footer from "../footer/footer";
 import Header from "../header/header";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loginUser } from "../../../redux/user/userAction";
+import { loginUser, resetForm } from "../../../redux/user/userAction";
 import imageLogin from "../../../assets/Login-amico.svg";
 
 const Login = () => {
@@ -17,6 +17,7 @@ const Login = () => {
   const { error, isLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
+    dispatch(resetForm());
     if (!!localStorage.getItem("accessToken")) {
       history.push("/home");
     }
@@ -29,13 +30,6 @@ const Login = () => {
       password: pass,
     };
     dispatch(loginUser(data, history));
-
-    // console.log(data);
-
-    // if (!error) {
-    //   dispatch(loginUser(data));
-    //   history.push("/");
-    // }
   };
 
   return (

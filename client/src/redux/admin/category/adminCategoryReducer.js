@@ -2,7 +2,8 @@ const initState = {
   categories: [],
   category: null,
   isLoading: false,
-  error: null
+  error: null,
+  length: 0,
 }
 
 const adminCategoryReducer = (state = initState, action) => {
@@ -21,6 +22,8 @@ const adminCategoryReducer = (state = initState, action) => {
       return { ...state, isLoading: false, category: null }
     case "ERROR_CATEGORIES":
       return { ...state, isLoading: false, error: action.payload }
+    case "LENGTH_CATEGORIES":
+      return { ...state, isLoading: false, length: action.payload }
     default:
       return state
   }

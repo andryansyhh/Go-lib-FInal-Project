@@ -55,7 +55,7 @@ const ContentPage = () => {
         <div className="container">
           <h3>Programming Content</h3>
           <div className="d-flex justify-content-between">
-            <Button size="sm" href="/">
+            <Button size="sm" href="/" className="btn btn-primary text-light">
               Back to Landing
             </Button>
             <div>
@@ -63,14 +63,14 @@ const ContentPage = () => {
                 size="sm"
                 onClick={previousPage}
                 className="mr-3"
-                disabled={currentPage == 0 ? true : false}
+                disabled={currentPage === 0 ? true : false}
               >
                 Prev
               </Button>
               <Button
                 size="sm"
                 onClick={nextPage}
-                disabled={currentPage == 8 ? true : false}
+                disabled={currentPage === 8 ? true : false}
               >
                 Next
               </Button>

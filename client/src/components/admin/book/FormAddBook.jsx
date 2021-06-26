@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Navbar, Form, Button, Alert } from "react-bootstrap";
+import { ProgressBar, Form, Button, Alert } from "react-bootstrap";
 import ToggleMenu from "../ToggleMenu";
 import { createBook } from "../../../redux/admin/book/adminBookAction";
 import { fetchCategories } from "../../../redux/admin/category/adminCategoryAction";
@@ -14,7 +14,9 @@ function CreateBook() {
   const [urlVideo, setUrlVideo] = useState("");
   const [categoryID, setCategoryID] = useState(0);
   const [file, setFile] = useState("");
-  const { error, isLoading } = useSelector((state) => state.adminBook);
+  const { error, isLoading, fileProgress } = useSelector(
+    (state) => state.adminBook
+  );
   const { categories } = useSelector((state) => state.adminCategory);
 
   useEffect(() => {
@@ -64,7 +66,7 @@ function CreateBook() {
                 <Form.Control
                   type="text"
                   name="url_video"
-                  placeholder="URL Video"
+                  placeholder="Embed Video"
                   onChange={(e) => {
                     e.preventDefault();
                     setUrlVideo(e.target.value);
@@ -75,7 +77,6 @@ function CreateBook() {
                 <Form.Control
                   type="file"
                   name="file"
-                  required
                   onChange={(e) => {
                     e.preventDefault();
                     setFile(e.target.files[0]);
@@ -84,7 +85,7 @@ function CreateBook() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formButton">
                 <select
-                  class="custom-select"
+                  className="custom-select"
                   id="inputGroupSelect01"
                   name="category_id"
                   onClick={(e) => {
@@ -112,6 +113,13 @@ function CreateBook() {
                   {isLoading ? "Loading..." : "Add"}
                 </Button>
               </Form.Group>
+              {fileProgress !== 0 && (
+                <ProgressBar
+                  animated
+                  now={fileProgress}
+                  label={`${fileProgress}%`}
+                />
+              )}
             </Form>
           </div>
         </div>
