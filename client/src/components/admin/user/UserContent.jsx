@@ -56,7 +56,7 @@ const UserContent = () => {
             </Button>
           </div>
           <div className="container-fluid">
-            <Table striped bordered hover>
+            <Table striped bordered hover responsive="lg">
               <thead>
                 <tr>
                   <th>#</th>
