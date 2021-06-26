@@ -5,7 +5,7 @@ import { fetchOneBook } from "../../../redux/admin/book/adminBookAction";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import Loading from "../spinner/Spinner";
-import { ResponsiveEmbed, Button } from "react-bootstrap";
+import { ResponsiveEmbed, Button, Modal } from "react-bootstrap"
 
 const DetailFile = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,12 @@ const DetailFile = () => {
   const bookID = location.pathname.substr(
     location.pathname.lastIndexOf("/") + 1
   );
+  const [lgShow, setLgShow] = useState(false);
 
   useEffect(() => {
     dispatch(fetchOneBook(bookID));
   }, []);
+
 
   return (
     <>
@@ -60,9 +62,25 @@ const DetailFile = () => {
                     // src={book.data.url_file}
                   />
                 </div>
-                <div
+                {/* <div
                   dangerouslySetInnerHTML={{ __html: book.data.url_video }}
-                ></div>
+                ></div> */}
+
+            <Button className="mt-3" onClick={() => setLgShow(true)}>Watch Video</Button>
+                <Modal
+                    size="lg"
+                    show={lgShow}
+                    onHide={() => setLgShow(false)}
+                    centered
+                  >
+                  <Modal.Header closeButton>
+                    <div className="mx-auto embed-responsive embed-responsive-16by9">
+                      <div 
+                        dangerouslySetInnerHTML={{ __html: book.data.url_video }}
+                      ></div>
+                    </div>
+                  </Modal.Header>
+                </Modal>
               </div>
             </>
           )}
