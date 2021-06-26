@@ -1,8 +1,7 @@
 import golibAPI from "../../../API/go-lib"
 
-const access_token = !localStorage.getItem("accessToken") ? "" : localStorage.getItem("accessToken")
-
 export const fetchUsers = () => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_LOADING" })
@@ -25,6 +24,7 @@ export const fetchUsers = () => {
 }
 
 export const fetchOneUser = (id) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_LOADING" })
@@ -47,6 +47,7 @@ export const fetchOneUser = (id) => {
 }
 
 export const createUser = (payload, history) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_LOADING" })
@@ -79,6 +80,7 @@ export const createUser = (payload, history) => {
 
 
 export const updateUser = (id, payload) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_LOADING" })
@@ -105,6 +107,7 @@ export const updateUser = (id, payload) => {
 
 
 export const deleteUser = (id, history) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_LOADING" })

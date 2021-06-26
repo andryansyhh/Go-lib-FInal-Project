@@ -15,7 +15,7 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" || len(authHeader) == 0 {
-			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user"})
+			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user (no header)"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return
@@ -25,7 +25,7 @@ func Middleware(userService user.Service, authService auth.Service) gin.HandlerF
 		token, err := authService.ValidateToken(authHeader)
 
 		if err != nil {
-			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user"})
+			errorResponse := helper.APINewResponse(401, "Unauthorized user", gin.H{"error": "unauthorize user (token unvalidated"})
 
 			c.AbortWithStatusJSON(401, errorResponse)
 			return

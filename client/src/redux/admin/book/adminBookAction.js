@@ -1,6 +1,6 @@
 import golibAPI from "../../../API/go-lib"
 
-const access_token = !localStorage.getItem("accessToken") ? "" : localStorage.getItem("accessToken")
+const access_token = localStorage.getItem("accessToken")
 
 export const fetchBooks = () => {
   return async (dispatch) => {
@@ -56,9 +56,13 @@ export const createBook = (payload, history) => {
         data: payload,
         headers: {
           "Authorization": access_token,
+        },
+        onUploadProgress: progress => {
+          const { loaded, total } = progress
+          let percent = Math.floor((loaded * 100) / total)
+          dispatch({ type: "PROGRESS_UPLOAD", payload: percent })
         }
       })
-
       // console.log(data)
       history.push("/admin/books")
       return dispatch({ type: "CREATE_BOOK", payload: data })
@@ -142,5 +146,23 @@ export const deleteBook = (id, history) => {
       console.log(err.response.data)
     }
   }
+}
 
+export const fetchLengthBooks = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "ADMIN_BOOK_LOADING" })
+
+      const { data } = await golibAPI({
+        method: "GET",
+        url: "/books/all",
+      })
+
+      return dispatch({ type: "LENGTH_BOOKS", payload: data })
+
+    } catch (err) {
+      dispatch({ type: "ERROR_BOOKS" })
+      console.log(err.response)
+    }
+  }
 }

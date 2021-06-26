@@ -3,6 +3,7 @@ package main
 import (
 	"golib/handler"
 	"golib/routes"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,6 +11,7 @@ import (
 func main() {
 
 	r := gin.Default()
+	r.Static("/file", "./file")
 	r.Use(handler.CorsMiddleware())
 
 	routes.UserRoute(r)
@@ -17,5 +19,7 @@ func main() {
 	routes.BooksRoute(r)
 	routes.BookDetailRoute(r)
 	routes.ContentRoute(r)
-	r.Run()
+
+	port := os.Getenv("PORT")
+	r.Run(":" + port)
 }
