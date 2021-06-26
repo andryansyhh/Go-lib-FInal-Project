@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/user/userAction";
 import logo from "../../../assets/logo.png";
+import styled from "styled-components";
 
 const Header = () => {
+  const NewHeader = styled.div``;
   const history = useHistory();
   const dispatch = useDispatch();
   const accessToken = localStorage.getItem("accessToken");
@@ -20,7 +22,7 @@ const Header = () => {
               }}
               className="navbar-brand navname"
             >
-              <img className="imglogo" src={logo} alt="" />
+              <img className="" src={logo} alt="" />
             </div>
 
             <button

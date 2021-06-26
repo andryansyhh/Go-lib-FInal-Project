@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../../assets/logo.png";
 
 const socMeds = [
-  { className: "fab fa-instagram me-3", href: "https://www.instagram.com/syahandryan_/?hl=id" },
+  {
+    className: "fab fa-instagram me-3",
+    href: "https://www.instagram.com/syahandryan_/?hl=id",
+  },
   { className: "fab fa-facebook me-3" },
   { className: "fab fa-twitter me-3" },
 ];
@@ -13,10 +17,10 @@ const Footer = () => {
       <footer className="text-center">
         {/* footer top */}
         <div className="row justify-content-center footer-1">
-          <div className="col-sm-4 d-flex justify-content-center">
-            <h1>Go-Lib</h1>
+          <div className="col-md-4 d-flex justify-content-center mb-3">
+            <img src={logo} alt="" width="250px" />
           </div>
-          <div className="col-sm-4 d-flex justify-content-center flex-column">
+          <div className="col-sm-4 d-flex flex-column">
             <h3>Our Contact</h3>
             <ul className="list-unstyled">
               <li>golib@gmail.com</li>
@@ -30,18 +34,19 @@ const Footer = () => {
             </div>
             <div className="row justify-content-start">
               <div className="col">
-
                 {socMeds.map((socMed) => (
-                  <a href={socMed.href} target="_blank"> <i className={socMed.className} ></i> </a>
+                  <a href={socMed.href} target="_blank">
+                    {" "}
+                    <i className={socMed.className}></i>{" "}
+                  </a>
                 ))}
-
               </div>
             </div>
           </div>
         </div>
         {/* footer bottom */}
         <div>
-          <div className="container">
+          <div className="containe pb-3">
             <div className="row justify-content-center footer">
               Copyright ©2021 Go-lib Team
             </div>

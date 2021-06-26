@@ -67,7 +67,7 @@ const HomePage = () => {
           <div className="row align-items-center justify-content-center">
             <div className="col-sm">
               <div className="row">
-                <h2 className="text-center">List all Category</h2>
+                <h2 className="text-center mb-5">List all Category</h2>
               </div>
               {isLoading ? (
                 <Loading />
@@ -76,48 +76,47 @@ const HomePage = () => {
                   {categories.data &&
                     categories.data.slice(0, 5).map((category, index) => {
                       return (
-                        <NewCard
-                          style={{ width: "12rem", margin: "1rem" }}
-                          key={index}
-                        >
-                          <a
-                            href={`/categories/${category.id}`}
-                            className="text-decoration-none"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              dispatch(fetchOneCategory(category.id));
-                              history.push(`/categories/${category.id}`);
-                            }}
-                          >
-                            <Card.Img
-                              variant="top"
-                              src={FolderImage}
-                              style={{
-                                maxHeight: "20vh",
-                                minHeight: "20vh",
-                                padding: "1rem",
+                        <div className="col-6 col-md-3 mb-3">
+                          <NewCard key={index}>
+                            <a
+                              href={`/categories/${category.id}`}
+                              className="text-decoration-none"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                dispatch(fetchOneCategory(category.id));
+                                history.push(`/categories/${category.id}`);
                               }}
-                            />
-                            <Card.Body
-                              className="text-center"
-                              style={{ fontSize: "0.8rem" }}
                             >
-                              <Card.Title
+                              <Card.Img
+                                variant="top"
+                                src={FolderImage}
                                 style={{
-                                  fontSize: "1rem",
-                                  display: "-webkit-box",
-                                  WebkitBoxOrient: "vertical",
-                                  WebkitLineClamp: "5",
-                                  overflow: "hidden",
-                                  textAlign: "center",
-                                  fontWeight: "bold",
+                                  maxHeight: "20vh",
+                                  minHeight: "20vh",
+                                  padding: "1rem",
                                 }}
+                              />
+                              <Card.Body
+                                className="text-center"
+                                style={{ fontSize: "0.8rem" }}
                               >
-                                {category.category_name}
-                              </Card.Title>
-                            </Card.Body>
-                          </a>
-                        </NewCard>
+                                <Card.Title
+                                  style={{
+                                    fontSize: "1rem",
+                                    display: "-webkit-box",
+                                    WebkitBoxOrient: "vertical",
+                                    WebkitLineClamp: "5",
+                                    overflow: "hidden",
+                                    textAlign: "center",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {category.category_name}
+                                </Card.Title>
+                              </Card.Body>
+                            </a>
+                          </NewCard>
+                        </div>
                       );
                     })}
                 </div>
