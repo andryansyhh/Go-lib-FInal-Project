@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/user/userAction";
+import logo from "../../../assets/logo.png";
 
 const Header = () => {
   const history = useHistory();
@@ -19,7 +20,7 @@ const Header = () => {
               }}
               className="navbar-brand navname"
             >
-              <h2>Go-Lib</h2>
+              <img className="imglogo" src={logo} alt="" />
             </div>
 
             <button

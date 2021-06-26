@@ -55,7 +55,7 @@ function LandingPage() {
                 <br />
                 <button
                   onClick={() => {
-                    history.push("/home");
+                    history.push("/login");
                   }}
                   type="button"
                   class="btn btn-primary"
