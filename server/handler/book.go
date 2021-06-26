@@ -6,6 +6,7 @@ import (
 	"golib/entity"
 	"golib/helper"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -80,7 +81,9 @@ func (h *bookHandler) CreateBookHandler(c *gin.Context) {
 		return
 	}
 
-	path := fmt.Sprintf("file/%s", file.Filename)
+	titleFile := strings.Replace(title, " ", "-", -1)
+	fileName := strings.Replace(file.Filename, " ", "-", -1)
+	path := fmt.Sprintf("file/%s-%s", titleFile, fileName)
 
 	err = c.SaveUploadedFile(file, path)
 

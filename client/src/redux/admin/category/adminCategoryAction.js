@@ -1,8 +1,7 @@
 import golibAPI from "../../../API/go-lib"
 
-const access_token = !localStorage.getItem("accessToken") ? "" : localStorage.getItem("accessToken")
-
 export const fetchCategories = () => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_CATEGORY_LOADING" })
@@ -25,6 +24,7 @@ export const fetchCategories = () => {
 }
 
 export const fetchOneCategory = (id) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_CATEGORY_LOADING" })
@@ -47,6 +47,7 @@ export const fetchOneCategory = (id) => {
 }
 
 export const createCategory = (payload, history) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_CATEGORY_LOADING" })
@@ -74,6 +75,7 @@ export const createCategory = (payload, history) => {
 }
 
 export const updateCategory = (id, payload) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_CATEGORY_LOADING" })
@@ -100,6 +102,7 @@ export const updateCategory = (id, payload) => {
 
 
 export const deleteCategory = (id, history) => {
+  const access_token = localStorage.getItem("accessToken")
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_CATEGORY_LOADING" })
@@ -120,5 +123,23 @@ export const deleteCategory = (id, history) => {
       console.log(err.response.data)
     }
   }
+}
 
+export const fetchLengthCategories = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "ADMIN_CATEGORY_LOADING" })
+
+      const { data } = await golibAPI({
+        method: "GET",
+        url: "/categories/all",
+      })
+
+      return dispatch({ type: "LENGTH_CATEGORIES", payload: data })
+
+    } catch (err) {
+      dispatch({ type: "ERROR_CATEGORIES" })
+      console.log(err.response)
+    }
+  }
 }

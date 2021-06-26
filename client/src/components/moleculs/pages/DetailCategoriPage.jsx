@@ -1,19 +1,37 @@
 import React, { useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
-import { fetchBooks } from "../../../redux/admin/book/adminBookAction";
 import Header from "../header/header";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router";
+import { fetchOneCategory } from "../../../redux/admin/category/adminCategoryAction";
+import Loading from "../../moleculs/spinner/Spinner";
+import styled from "styled-components";
 
 const DetailCategoriPage = () => {
   const dispatch = useDispatch();
-
-  const { books, isLoading } = useSelector((state) => state.adminBook);
+  const history = useHistory();
+  const location = useLocation();
+  const { category, isLoading } = useSelector((state) => state.adminCategory);
+  const categoryID = location.pathname.substr(
+    location.pathname.lastIndexOf("/") + 1
+  );
 
   useEffect(() => {
-    dispatch(fetchBooks());
+    dispatch(fetchOneCategory(categoryID));
   }, []);
 
-  console.log(books);
+  const NewCard = styled.div`
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+    transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+      0.3s box-shadow,
+      0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+  `;
 
   return (
     <>
@@ -21,12 +39,21 @@ const DetailCategoriPage = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <h2 className="text-center">List All Category</h2>
+            {category && (
+              <h2 className="text-center">{category.data.category_name}</h2>
+            )}
           </div>
         </div>
         <div className="row justify-content-between">
           <div className="col-3">
-            <button className="btn btn-primary text-light">Back to Home</button>
+            <button
+              className="btn btn-primary text-light"
+              onClick={() => {
+                history.push("/home");
+              }}
+            >
+              Back to Home
+            </button>
           </div>
           <div className="col-3">
             <form action="">
@@ -49,28 +76,58 @@ const DetailCategoriPage = () => {
             </form>
           </div>
         </div>
-        <div className="row">
-          {books.data &&
-            books.data.map((book) => {
-              return (
-                <div className="col-6 col-md-3 mt-4">
-                  <Card className="shadow-sm">
-                    <Card.Img
-                      variant="top"
-                      src="https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png"
-                    />
-                    <Card.Body>
-                      <Card.Title>{book.title}</Card.Title>
-                      {/* <Card.Text>{book.url_file}</Card.Text> */}
-                      <Button variant="primary" className="text-light">
-                        Go somewhere
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </div>
-              );
-            })}
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="row">
+            {category && category.data.books.length === 0 && <h2>No File</h2>}
+            {category &&
+              category.data.books.map((data, index) => {
+                return (
+                  <div className="col-6 col-md-3 mt-4" key={index}>
+                    <NewCard style={{ width: "10rem" }} key={index}>
+                      <a
+                        href={`/categories/${category.id}`}
+                        className="text-decoration-none"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          dispatch(fetchOneCategory(data.id));
+                          history.push(`/files/${data.id}`);
+                        }}
+                      >
+                        <Card.Img
+                          variant="top"
+                          src="https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png"
+                          style={{
+                            maxHeight: "20vh",
+                            minHeight: "20vh",
+                          }}
+                        />
+                        <Card.Body
+                          className="text-center"
+                          style={{ fontSize: "0.8rem" }}
+                        >
+                          <Card.Title
+                            style={{
+                              fontSize: "1rem",
+                              display: "-webkit-box",
+                              WebkitBoxOrient: "vertical",
+                              WebkitLineClamp: "5",
+                              overflow: "hidden",
+                              textAlign: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {data.title}
+                          </Card.Title>
+                        </Card.Body>
+                      </a>
+                    </NewCard>
+                  </div>
+                );
+              })}
+          </div>
+        )}
       </div>
     </>
   );

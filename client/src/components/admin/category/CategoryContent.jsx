@@ -53,7 +53,10 @@ const CategoryContent = () => {
           </div>
           <h3 className="mt-1">Categories</h3>
           <div className="container-fluid d-flex justify-content-end">
-            <Button href="/admin/categories/add" className="mb-2">
+            <Button
+              href="/admin/categories/add"
+              className="mb-2 btn btn-primary text-light"
+            >
               Add Category
             </Button>
           </div>
@@ -80,7 +83,10 @@ const CategoryContent = () => {
                         </td>
                         <td>{data.category_name}</td>
                         <td>
-                          <Button href={"/admin/categories/edit/" + data.id}>
+                          <Button
+                            href={"/admin/categories/edit/" + data.id}
+                            className="btn btn-primary text-light"
+                          >
                             Update
                           </Button>
                         </td>
@@ -92,6 +98,7 @@ const CategoryContent = () => {
                               setCategoryID(data.id);
                               setCategoryName(data.category_name);
                             }}
+                            className="btn btn-primary text-light"
                           >
                             Delete
                           </Button>

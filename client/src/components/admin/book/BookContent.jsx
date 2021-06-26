@@ -50,12 +50,15 @@ const BookContent = () => {
           </div>
           <h3 className="mt-1">Books</h3>
           <div className="container-fluid d-flex justify-content-end">
-            <Button href="/admin/books/add" className="mb-2">
+            <Button
+              href="/admin/books/add"
+              className="mb-2 btn btn-primary text-light"
+            >
               Add Book
             </Button>
           </div>
-          <div className="container-fluid">
-            <Table striped bordered hover>
+          <div className="container">
+            <Table responsive="sm" striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -84,7 +87,10 @@ const BookContent = () => {
                         <td>{data.category_id}</td>
 
                         <td>
-                          <Button href={"/admin/books/edit/" + data.id}>
+                          <Button
+                            href={"/admin/books/edit/" + data.id}
+                            className="btn btn-primary text-light"
+                          >
                             Update
                           </Button>
                         </td>
@@ -96,6 +102,7 @@ const BookContent = () => {
                               setBookID(data.id);
                               setBookTitle(data.title);
                             }}
+                            className="btn btn-primary text-light"
                           >
                             Delete
                           </Button>

@@ -1,5 +1,14 @@
 import golibAPI from "../../API/go-lib"
+import UserDashboard from "../../components/moleculs/pages/admin/user/UserDashboard";
+import AdminRoute from "../../components/routes/AdminRoute";
+import { fetchCategories } from "../admin/category/adminCategoryAction"
 import { fetchUsers } from "../admin/user/adminAction"
+
+export const resetForm = () => {
+    return {
+        type: "USER_RESET_FORM",
+    };
+}
 
 export const registerUser = (payload) => {
     return async (dispatch) => {
@@ -40,14 +49,16 @@ export const loginUser = (payload, history) => {
 
             localStorage.setItem("accessToken", data.data.token)
 
-            console.log(data)
+            // console.log(data)
             if (data.data.role === "admin") {
+                const encodedAdm = btoa(data.data.role)
+                localStorage.setItem(`${encodedAdm}`, encodedAdm)
                 dispatch(fetchUsers())
                 history.push("/admin/users")
             } else {
+                dispatch(fetchCategories())
                 history.push("/home")
             }
-
             return dispatch({ type: "USER_LOGIN", payload: data })
 
         } catch (err) {

@@ -7,6 +7,8 @@ const initState = {
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
+    case "USER_RESET_FORM":
+      return { ...initState, };
     case "USER_LOADING":
       return { ...state, isLoading: true };
     case "USER_REGISTER":
@@ -15,6 +17,7 @@ const userReducer = (state = initState, action) => {
       return { ...state, user: action.payload, isLoading: false };
     case "LOGOUT_USER":
       localStorage.removeItem("accessToken");
+      localStorage.clear();
       return { ...state, user: null };
     case "USER_ERROR":
       return { ...state, error: action.payload, isLoading: false };

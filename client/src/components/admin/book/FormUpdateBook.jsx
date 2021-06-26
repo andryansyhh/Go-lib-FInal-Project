@@ -70,7 +70,7 @@ function UpdateBook() {
               <Form.Group className="mb-3" controlId="formBasicText">
                 <Form.Control
                   type="text"
-                  placeholder="URL Video"
+                  placeholder="Embed Video"
                   onChange={(e) => {
                     e.preventDefault();
                     setUrlVideo(e.target.value);
@@ -112,7 +112,9 @@ function UpdateBook() {
                   variant="primary"
                   type="submit"
                   disabled={
-                    !!!title && !!!urlVideo && !!!categoryID ? true : false
+                    !!!title && !!!urlVideo && !!!categoryID && !!!file
+                      ? true
+                      : false
                   }
                 >
                   {isLoading ? "Loading..." : "Update"}
