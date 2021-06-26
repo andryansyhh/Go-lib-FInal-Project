@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Footer from "../footer/footer";
 import Header from "../header/header";
+import { useHistory } from "react-router";
 import learningbro from "../../../assets/Learning-bro.svg";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import { fetchLengthBooks } from "../../../redux/admin/book/adminBookAction";
 function LandingPage() {
   const contentData = useSelector((state) => state.content);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { length, isLoading } = useSelector((state) => state.adminCategory);
   const { lengthBooks } = useSelector((state) => state.adminBook);
 
@@ -40,23 +42,26 @@ function LandingPage() {
   return (
     <div>
       <Header />
-      <div className="container-fluid  page-container section1-container">
+      <div className="container-fluid  section1-container">
         <div className="container">
           <div className="row align-items-center ">
             <div className="col-sm">
               <div className="row">
-                <h1 className="">
+                <h1>
                   “No matter how busy you may think you are, you must find time
                   for reading, or surrender yourself to self-chosen ignorance.”
                 </h1>
                 <p>― Atwood H. Townsend</p>
-                <Button
-                  href="/home"
+                <br />
+                <button
+                  onClick={() => {
+                    history.push("/home");
+                  }}
                   type="button"
-                  className="btn btn-primary text-light"
+                  class="btn btn-primary"
                 >
-                  More
-                </Button>
+                  Go to Home Page
+                </button>
               </div>
             </div>
             <div className="col-sm">
