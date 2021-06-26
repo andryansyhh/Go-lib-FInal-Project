@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../footer/footer";
 import Header from "../header/header";
+import { useDispatch } from "react-redux";
+import contentAction from "../../../redux/content/contentAction";
+import { useHistory } from "react-router";
+
 import learningbro from "../../../assets/Learning-bro.svg";
 
 function LandingPage() {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
   return (
     <div>
       <Header />
-      <div className="container-fluid  page-container section1-container">
+      <div className="container-fluid  section1-container">
         <div className="container">
           <div className="row align-items-center ">
             <div className="col-sm">
               <div className="row">
-                <h1 className="">
+                <h1>
                   “No matter how busy you may think you are, you must find time
                   for reading, or surrender yourself to self-chosen ignorance.”
                 </h1>
                 <p>― Atwood H. Townsend</p>
-                <button type="button" class="btn btn-primary">
-                  More
+                <br />
+                <button
+                  onClick={() => {
+                    history.push("/home");
+                  }}
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Go to Home Page
                 </button>
               </div>
             </div>
@@ -49,67 +64,12 @@ function LandingPage() {
           <div className="row align-items-center justify-content-center">
             <div className="col-sm">
               <div className="row">
-                <h2 className="text-center">Content</h2>
+                <h2 className="text-center">Tech news</h2>
               </div>
               <div className="row content-container">
                 <div className="col-sm card-container">
                   <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
-                    <div className="card-body">
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm card-container">
-                  <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
-                    <div className="card-body">
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm card-container">
-                  <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
-                    <div className="card-body">
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm card-container">
-                  <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
-                    <div className="card-body">
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm card-container">
-                  <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
-                    <div className="card-body">
-                      <p className="card-text">
-                        Some quick example text to build on the card title and
-                        make up the bulk of the card's content.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-sm card-container">
-                  <div className="card" style={{ width: "18rem" }}>
-                    <img src="..." className="card-img-top" alt="..." />
+                    <img src="" className="card-img-top" alt="..." />
                     <div className="card-body">
                       <p className="card-text">
                         Some quick example text to build on the card title and

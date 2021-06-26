@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import homeImage from "../../../assets/Code-typing-bro.svg";
 import FolderImage from "../../../assets/folder.png";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../../redux/admin/category/adminCategoryAction";
-import Spinner from "../spinner/Spinner"
+import Spinner from "../spinner/Spinner";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const HomePage = () => {
   }, []);
 
   return (
-
     <div>
       <Header />
       <div className="container-fluid  page-container">
@@ -27,7 +26,7 @@ const HomePage = () => {
                 <h1 className="">
                   Welcome user, you can get and learn programming source here
                 </h1>
-                <button type="button" class="btn btn-primary">
+                <button use type="button" class="btn btn-primary">
                   More
                 </button>
               </div>
@@ -49,24 +48,27 @@ const HomePage = () => {
                 <h2 className="text-center">List all Category</h2>
               </div>
               <div className="row">
-              {categories.data && categories.data.map((category)=>{
-                return(
+                {categories.data &&
+                  categories.data.map((category) => {
+                    return (
                       <div className="content-container">
                         <div className="col-sm card-container">
                           <div className="card" style={{ width: "18rem" }}>
-                            <img src={FolderImage} className="card-img-top" style={{ margin:"3rem",width: "15rem"}} alt="..." />
-                          <div className="card-body">
-                          <h5>{category.category_name}</h5>
+                            <img
+                              src={FolderImage}
+                              className="card-img-top"
+                              style={{ margin: "3rem", width: "15rem" }}
+                              alt="..."
+                            />
+                            <div className="card-body">
+                              <h5>{category.category_name}</h5>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    </div>
-                )
-              })}
+                    );
+                  })}
               </div>
-
-
-
             </div>
           </div>
         </div>

@@ -52,8 +52,8 @@ const ContentPage = () => {
           </Spinner>
         </div>
       ) : (
-        <div className="container">
-          <h3>Programming Content</h3>
+        <div className="container text-center">
+          <h3>Tech News</h3>
           <div className="d-flex justify-content-between">
             <Button size="sm" href="/">
               Back to Landing
