@@ -21,7 +21,8 @@ const CategoryContent = () => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryID, setCategoryID] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5);
+  const [usersPerPage] = useState(10);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -31,15 +32,23 @@ const CategoryContent = () => {
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   var currentCategories = [];
+  var filterSearch = [];
   if (categories.data) {
     currentCategories = categories.data.slice(
       indexOfFirstUser,
       indexOfLastUser
     );
+    filterSearch = categories.data.filter((item) => {
+      return search !== "" ? item.category_name.includes(search) : "";
+    });
   }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const searching = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -49,7 +58,10 @@ const CategoryContent = () => {
         <div className="mt-3" id="page-content-wrapper">
           <div className="d-flex justify-content-between">
             <ToggleMenu />
-            <SearchMenu />
+            <SearchMenu
+              searching={searching}
+              searchBy="Search by category name"
+            />
           </div>
           <h3 className="mt-1">Categories</h3>
           <div className="container-fluid d-flex justify-content-end">
@@ -72,12 +84,79 @@ const CategoryContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentCategories &&
-                  currentCategories.map((data, index) => {
+                {search == ""
+                  ? currentCategories.map((data, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            {usersPerPage * currentPage == 10
+                              ? index + 1
+                              : currentPage + index + usersPerPage - 1}
+                          </td>
+                          <td>{data.category_name}</td>
+                          <td>
+                            <Button
+                              href={"/admin/categories/edit/" + data.id}
+                              className="btn btn-primary text-light"
+                            >
+                              Update
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                setShow(true);
+                                setCategoryID(data.id);
+                                setCategoryName(data.category_name);
+                              }}
+                              className="btn btn-primary text-light"
+                            >
+                              Delete
+                            </Button>
+                            <Modal
+                              show={show}
+                              onHide={handleClose}
+                              className="mt-5"
+                            >
+                              <Modal.Header closeButton>
+                                <Modal.Title>
+                                  Are you sure to delete category {categoryName}{" "}
+                                  ?
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  Close
+                                </Button>
+                                <Button
+                                  variant="danger"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(
+                                      deleteCategory(categoryID, history)
+                                    );
+                                    handleClose();
+                                  }}
+                                >
+                                  Yes
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : null}
+                {filterSearch &&
+                  filterSearch.map((data, index) => {
                     return (
                       <tr key={index}>
                         <td>
-                          {usersPerPage * currentPage == 5
+                          {usersPerPage * currentPage == 10
                             ? index + 1
                             : currentPage + index + usersPerPage - 1}
                         </td>
@@ -135,11 +214,13 @@ const CategoryContent = () => {
               </tbody>
             </Table>
             <div className="d-flex justify-content-end">
-              <Pagination
-                usersPerPage={usersPerPage}
-                totalUsers={categories.data ? categories.data.length : 0}
-                paginate={paginate}
-              />
+              {search == "" && (
+                <Pagination
+                  usersPerPage={usersPerPage}
+                  totalUsers={categories.data ? categories.data.length : 0}
+                  paginate={paginate}
+                />
+              )}
             </div>
           </div>
         </div>

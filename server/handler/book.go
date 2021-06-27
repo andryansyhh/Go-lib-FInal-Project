@@ -147,7 +147,8 @@ func (h *bookHandler) UpdateFileByIDHandler(c *gin.Context) {
 		return
 	}
 
-	path := fmt.Sprintf("file/%s", file.Filename)
+	fileName := strings.Replace(file.Filename, " ", "-", -1)
+	path := fmt.Sprintf("file/%s", fileName)
 
 	err = c.SaveUploadedFile(file, path)
 

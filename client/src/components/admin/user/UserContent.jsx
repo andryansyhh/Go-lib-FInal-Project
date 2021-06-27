@@ -19,7 +19,8 @@ const UserContent = () => {
   const [user, setUser] = useState("");
   const [userID, setUserID] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5);
+  const [usersPerPage] = useState(10);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -29,12 +30,20 @@ const UserContent = () => {
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   var currentUsers = [];
+  var filterSearch = [];
   if (users.data) {
     currentUsers = users.data.slice(indexOfFirstUser, indexOfLastUser);
+    filterSearch = users.data.filter((item) => {
+      return search !== "" ? item.user_name.includes(search) : "";
+    });
   }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const searching = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -44,7 +53,7 @@ const UserContent = () => {
         <div className="mt-3" id="page-content-wrapper">
           <div className="d-flex justify-content-between">
             <ToggleMenu />
-            <SearchMenu />
+            <SearchMenu searching={searching} searchBy="Search by user name" />
           </div>
           <h3 className="mt-1">Users</h3>
           <div className="container-fluid d-flex justify-content-end">
@@ -69,12 +78,78 @@ const UserContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentUsers &&
-                  currentUsers.map((data, index) => {
+                {search == ""
+                  ? currentUsers.map((data, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            {usersPerPage * currentPage == 10
+                              ? index + 1
+                              : currentPage + index + usersPerPage - 1}
+                          </td>
+                          <td>{data.name}</td>
+                          <td>{data.user_name}</td>
+                          <td>{data.email}</td>
+                          <td>
+                            <Button
+                              href={"/admin/users/edit/" + data.id}
+                              className="btn btn-primary text-light"
+                            >
+                              Update
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                setShow(true);
+                                setUserID(data.id);
+                                setUser(data.user_name);
+                              }}
+                              className="btn btn-primary text-light"
+                            >
+                              Delete
+                            </Button>
+                            <Modal
+                              show={show}
+                              onHide={handleClose}
+                              className="mt-5"
+                            >
+                              <Modal.Header closeButton>
+                                <Modal.Title>
+                                  Are you sure to delete user {user} ?
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  Close
+                                </Button>
+                                <Button
+                                  variant="danger"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(deleteUser(userID, history));
+                                    handleClose();
+                                  }}
+                                >
+                                  Yes
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : null}
+                {filterSearch &&
+                  filterSearch.map((data, index) => {
                     return (
                       <tr key={index}>
                         <td>
-                          {usersPerPage * currentPage == 5
+                          {usersPerPage * currentPage == 10
                             ? index + 1
                             : currentPage + index + usersPerPage - 1}
                         </td>
@@ -134,11 +209,13 @@ const UserContent = () => {
               </tbody>
             </Table>
             <div className="d-flex justify-content-end">
-              <Pagination
-                usersPerPage={usersPerPage}
-                totalUsers={users.data ? users.data.length : 0}
-                paginate={paginate}
-              />
+              {search == "" && (
+                <Pagination
+                  usersPerPage={usersPerPage}
+                  totalUsers={users.data ? users.data.length : 0}
+                  paginate={paginate}
+                />
+              )}
             </div>
           </div>
         </div>
