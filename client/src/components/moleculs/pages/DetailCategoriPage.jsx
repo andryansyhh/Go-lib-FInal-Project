@@ -6,6 +6,7 @@ import { useHistory, useLocation } from "react-router";
 import { fetchOneCategory } from "../../../redux/admin/category/adminCategoryAction";
 import Loading from "../../moleculs/spinner/Spinner";
 import styled from "styled-components";
+import Footer from "../footer/footer";
 
 const DetailCategoriPage = () => {
   const dispatch = useDispatch();
@@ -129,6 +130,7 @@ const DetailCategoriPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </>
   );
 };

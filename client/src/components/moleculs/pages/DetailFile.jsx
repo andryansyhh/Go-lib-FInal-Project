@@ -5,7 +5,7 @@ import { fetchOneBook } from "../../../redux/admin/book/adminBookAction";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import Loading from "../spinner/Spinner";
-import { ResponsiveEmbed, Button, Modal } from "react-bootstrap"
+import { ResponsiveEmbed, Button, Modal } from "react-bootstrap";
 
 const DetailFile = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const DetailFile = () => {
   useEffect(() => {
     dispatch(fetchOneBook(bookID));
   }, []);
-
 
   return (
     <>
@@ -58,25 +57,29 @@ const DetailFile = () => {
                     className="embed-responsive-item mb-3"
                     allowFullScreen
                     title="file"
-                    src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
-                    // src={book.data.url_file}
+                    // src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
+                    src={book.data.url_file}
                   />
                 </div>
                 {/* <div
                   dangerouslySetInnerHTML={{ __html: book.data.url_video }}
                 ></div> */}
 
-            <Button className="mt-3" onClick={() => setLgShow(true)}>Watch Video</Button>
+                <Button className="mt-3" onClick={() => setLgShow(true)}>
+                  Watch Video
+                </Button>
                 <Modal
-                    size="lg"
-                    show={lgShow}
-                    onHide={() => setLgShow(false)}
-                    centered
-                  >
+                  size="lg"
+                  show={lgShow}
+                  onHide={() => setLgShow(false)}
+                  centered
+                >
                   <Modal.Header closeButton>
                     <div className="mx-auto embed-responsive embed-responsive-16by9">
-                      <div 
-                        dangerouslySetInnerHTML={{ __html: book.data.url_video }}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: book.data.url_video,
+                        }}
                       ></div>
                     </div>
                   </Modal.Header>
