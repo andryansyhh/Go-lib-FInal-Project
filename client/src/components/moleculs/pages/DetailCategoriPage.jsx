@@ -50,10 +50,10 @@ const DetailCategoriPage = () => {
             <button
               className="btn btn-primary text-light"
               onClick={() => {
-                history.push("/home");
+                history.push("/categories");
               }}
             >
-              Back to Home
+              Category List
             </button>
           </div>
           <div className="col-7 col-md-5 col-xl-3">
@@ -65,7 +65,7 @@ const DetailCategoriPage = () => {
                     name="search"
                     id="search"
                     className="form-control"
-                    placeholder="Search Books.."
+                    placeholder="Search File.."
                   />
                 </div>
                 <div className="col-2">

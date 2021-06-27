@@ -67,7 +67,7 @@ const HomePage = () => {
           <div className="row align-items-center justify-content-center">
             <div className="col-sm">
               <div className="row">
-                <h2 className="text-center mb-5">List Category</h2>
+                <h2 className="text-center mb-5">Category List</h2>
               </div>
               {isLoading ? (
                 <Loading />
