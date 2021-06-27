@@ -3,16 +3,17 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import "./user/styles.css";
 import searchIcon from "../../assets/search-icon.svg";
 
-const SearchMenu = () => {
+const SearchMenu = ({ searching, searchBy }) => {
   return (
     <>
       <div className="container-fluid d-flex mt-4">
         <InputGroup className="">
           <FormControl
-            placeholder="Search"
+            placeholder={searchBy}
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
             style={{ borderRadius: "10px" }}
+            onChange={searching}
           />
           <InputGroup.Append>
             <Button

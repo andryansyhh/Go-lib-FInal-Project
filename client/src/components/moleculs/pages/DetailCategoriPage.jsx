@@ -7,6 +7,7 @@ import { fetchOneCategory } from "../../../redux/admin/category/adminCategoryAct
 import Loading from "../../moleculs/spinner/Spinner";
 import styled from "styled-components";
 import Footer from "../footer/footer";
+import { fetchOneBook } from "../../../redux/admin/book/adminBookAction";
 
 const DetailCategoriPage = () => {
   const dispatch = useDispatch();
@@ -88,11 +89,11 @@ const DetailCategoriPage = () => {
                   <div className="col-6 col-md-3 mt-4" key={index}>
                     <NewCard key={index}>
                       <a
-                        href={`/categories/${category.id}`}
+                        href={`/files/${data.id}`}
                         className="text-decoration-none"
                         onClick={(e) => {
                           e.preventDefault();
-                          dispatch(fetchOneCategory(data.id));
+                          dispatch(fetchOneBook(data.id));
                           history.push(`/files/${data.id}`);
                         }}
                       >

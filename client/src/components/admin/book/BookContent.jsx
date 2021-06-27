@@ -21,8 +21,10 @@ const BookContent = () => {
   const [bookTitle, setBookTitle] = useState("");
   const [bookID, setBookID] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5);
+  const [usersPerPage] = useState(10);
   var currentBooks = [];
+  var filterSearch = [];
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     dispatch(fetchBooks());
@@ -33,10 +35,17 @@ const BookContent = () => {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   if (books.data) {
     currentBooks = books.data.slice(indexOfFirstUser, indexOfLastUser);
+    filterSearch = books.data.filter((item) => {
+      return search !== "" ? item.title.includes(search) : "";
+    });
   }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const searching = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -46,7 +55,7 @@ const BookContent = () => {
         <div className="mt-3" id="page-content-wrapper">
           <div className="d-flex justify-content-between">
             <ToggleMenu />
-            <SearchMenu />
+            <SearchMenu searching={searching} searchBy="Search by title" />
           </div>
           <h3 className="mt-1">Books</h3>
           <div className="container-fluid d-flex justify-content-end">
@@ -72,18 +81,104 @@ const BookContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentBooks &&
-                  currentBooks.map((data, index) => {
+                {search == ""
+                  ? currentBooks.map((data, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>
+                            {usersPerPage * currentPage == 10
+                              ? index + 1
+                              : currentPage + index + usersPerPage - 1}
+                          </td>
+                          <td>{data.title}</td>
+                          <td>{data.url_file}</td>
+                          <td
+                            style={{
+                              maxWidth: "150px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {data.url_video}
+                          </td>
+                          <td>{data.category_id}</td>
+
+                          <td>
+                            <Button
+                              href={"/admin/books/edit/" + data.id}
+                              className="btn btn-primary text-light"
+                            >
+                              Update
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                setShow(true);
+                                setBookID(data.id);
+                                setBookTitle(data.title);
+                              }}
+                              className="btn btn-primary text-light"
+                            >
+                              Delete
+                            </Button>
+                            <Modal
+                              show={show}
+                              onHide={handleClose}
+                              className="mt-5"
+                            >
+                              <Modal.Header closeButton>
+                                <Modal.Title>
+                                  Are you sure to delete {bookTitle} ?
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  Close
+                                </Button>
+                                <Button
+                                  variant="danger"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(deleteBook(bookID, history));
+                                    handleClose();
+                                  }}
+                                >
+                                  Yes
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : null}
+                {filterSearch &&
+                  filterSearch.map((data, index) => {
                     return (
                       <tr key={index}>
                         <td>
-                          {usersPerPage * currentPage == 5
+                          {usersPerPage * currentPage == 10
                             ? index + 1
                             : currentPage + index + usersPerPage - 1}
                         </td>
                         <td>{data.title}</td>
                         <td>{data.url_file}</td>
-                        <td>{data.url_video}</td>
+                        <td
+                          style={{
+                            maxWidth: "150px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {data.url_video}
+                        </td>
                         <td>{data.category_id}</td>
 
                         <td>
@@ -139,11 +234,13 @@ const BookContent = () => {
               </tbody>
             </table>
             <div className="d-flex justify-content-end">
-              <Pagination
-                usersPerPage={usersPerPage}
-                totalUsers={books.data ? books.data.length : 0}
-                paginate={paginate}
-              />
+              {search == "" && (
+                <Pagination
+                  usersPerPage={usersPerPage}
+                  totalUsers={books.data ? books.data.length : 0}
+                  paginate={paginate}
+                />
+              )}
             </div>
           </div>
         </div>
