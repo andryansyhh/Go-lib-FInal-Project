@@ -42,9 +42,8 @@ function CreateBook() {
           <ToggleMenu />
         </div>
         <h3>Add New Book</h3>
-        <div className="container-fluid">
           {error && <Alert variant="danger">{error}</Alert>}
-          <div className="container d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <Form
               className="col-sm-6 mt-5"
               onSubmit={submitCreateBook}
@@ -105,13 +104,13 @@ function CreateBook() {
                 </select>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formButton">
-                <Button
-                  variant="primary"
+                <button
+                  className="btn btn-primary"
                   type="submit"
                   disabled={isLoading ? true : false}
                 >
                   {isLoading ? "Loading..." : "Add"}
-                </Button>
+                </button>
               </Form.Group>
               {fileProgress !== 0 && (
                 <ProgressBar
@@ -123,7 +122,6 @@ function CreateBook() {
             </Form>
           </div>
         </div>
-      </div>
     </>
   );
 }

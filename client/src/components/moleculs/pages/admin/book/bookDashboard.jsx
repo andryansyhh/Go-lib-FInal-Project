@@ -9,7 +9,7 @@ const BookDashboard = () => {
   return (
     <>
       <Header />
-      <div className="d-flex mt-3 vh-100" id="wrapper">
+      <div className="d-flex mt-3" id="wrapper">
         <Sidebar />
         <BookContent />
       </div>

@@ -27,7 +27,7 @@ const DetailFile = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="container vh-100">
+        <div className="container">
           {book && (
             <>
               <div className="row justify-content-between">
@@ -42,7 +42,7 @@ const DetailFile = () => {
                   </button>
                 </div>
               </div>
-              <div className="row vh-100">
+              <div className="row">
                 <h3 className="text-center">{book.data.title}</h3>
                 <div className="mb-2">
                   <Button
@@ -51,8 +51,14 @@ const DetailFile = () => {
                   >
                     Download
                   </Button>
+                  <Button
+                    className="btn btn-primary text-light ml-3"
+                    onClick={() => setLgShow(true)}
+                  >
+                    Watch Video
+                  </Button>
                 </div>
-                <div className="mx-auto embed-responsive embed-responsive-16by9">
+                <div className="mx-auto embed-responsive embed-responsive-16by9 my-5">
                   <iframe
                     className="embed-responsive-item mb-3"
                     allowFullScreen
@@ -65,9 +71,6 @@ const DetailFile = () => {
                   dangerouslySetInnerHTML={{ __html: book.data.url_video }}
                 ></div> */}
 
-                <Button className="mt-3" onClick={() => setLgShow(true)}>
-                  Watch Video
-                </Button>
                 <Modal
                   size="lg"
                   show={lgShow}
