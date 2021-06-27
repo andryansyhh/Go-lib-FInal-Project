@@ -46,11 +46,11 @@ const HomePage = () => {
             <div className="col-sm">
               <div className="row">
                 <h1 className="">
-                  Welcome user, you can get and learn programming source here
+                  Welcome, you can get and learn programming source here
                 </h1>
-                <button type="button" className="btn btn-primary text-light">
+                {/* <button type="button" className="btn btn-primary text-light">
                   More
-                </button>
+                </button> */}
               </div>
             </div>
             <div className="col-sm">
@@ -67,14 +67,14 @@ const HomePage = () => {
           <div className="row align-items-center justify-content-center">
             <div className="col-sm">
               <div className="row">
-                <h2 className="text-center mb-5">List all Category</h2>
+                <h2 className="text-center mb-5">List Category</h2>
               </div>
               {isLoading ? (
                 <Loading />
               ) : (
                 <div className="row justify-content-center">
                   {categories.data &&
-                    categories.data.slice(0, 5).map((category, index) => {
+                    categories.data.slice(0, 4).map((category, index) => {
                       return (
                         <div className="col-6 col-md-3 mb-3">
                           <NewCard key={index}>
