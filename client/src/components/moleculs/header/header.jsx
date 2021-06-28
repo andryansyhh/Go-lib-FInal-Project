@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <>
       <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="container">
             <div
               onClick={() => {
@@ -43,7 +43,7 @@ const Header = () => {
               className="collapse navbar-collapse justify-content-end"
               id="navbarNav"
             >
-              <ul className="navbar-nav">
+              <ul className="navbar-nav navtext">
                 <li>
                   <Link
                     onClick={() => {
