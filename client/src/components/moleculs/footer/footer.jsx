@@ -5,10 +5,16 @@ import logo from "../../../assets/logo.png";
 const socMeds = [
   {
     className: "fab fa-instagram me-3",
-    href: "https://www.instagram.com/syahandryan_/?hl=id",
+    href: "https://www.instagram.com",
   },
-  { className: "fab fa-facebook me-3" },
-  { className: "fab fa-twitter me-3" },
+  {
+    className: "fab fa-facebook me-3",
+    href: "https://www.facebook.com/",
+  },
+  {
+    className: "fab fa-twitter me-3",
+    href: "https://www.twitter.com/",
+  },
 ];
 
 const Footer = () => {
