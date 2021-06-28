@@ -28,7 +28,6 @@ type BookInput struct {
 	CategoryID int    `json:"category_id" binding:"required"`
 	UrlVideo   string `json:"url_video"`
 	UrlFile    string `json:"url_file"`
-
 }
 
 type UpdateBookInput struct {
@@ -36,7 +35,6 @@ type UpdateBookInput struct {
 	CategoryID int    `json:"category_id"`
 	UrlVideo   string `json:"url_video"`
 	UrlFile    string	`json:"url_file"`
-
 }
 
 type BookDetailOutput struct {

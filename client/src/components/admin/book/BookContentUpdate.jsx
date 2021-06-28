@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { fetchOneBook } from "../../../redux/admin/book/adminBookAction";
+import {
+  fetchOneBook,
+  resetForm,
+} from "../../../redux/admin/book/adminBookAction";
 import Loading from "../../moleculs/spinner/Spinner";
 import style from "../user/styles.css";
 

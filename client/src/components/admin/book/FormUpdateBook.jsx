@@ -2,14 +2,16 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { Navbar, Form, Button, Alert } from "react-bootstrap";
+import { Navbar, Form, Button, Alert, ProgressBar } from "react-bootstrap";
 import ToggleMenu from "../ToggleMenu";
 import { fetchCategories } from "../../../redux/admin/category/adminCategoryAction";
 import {
+  resetForm,
   updateBook,
   updateBookFile,
 } from "../../../redux/admin/book/adminBookAction";
 import BookContentUpdate from "./BookContentUpdate";
+import { storage } from "../../../config";
 
 function UpdateBook() {
   const history = useHistory();
@@ -19,30 +21,62 @@ function UpdateBook() {
   const [urlVideo, setUrlVideo] = useState("");
   const [categoryID, setCategoryID] = useState(0);
   const [file, setFile] = useState("");
+  const [fileProgress, setFileProgress] = useState(0);
+  const [fileLoading, setFileLoading] = useState(false);
   const { isLoading } = useSelector((state) => state.adminBook);
   const { categories } = useSelector((state) => state.adminCategory);
   const bookID = location.pathname.substr(
     location.pathname.lastIndexOf("/") + 1
   );
-  const formData = new FormData();
+  // const formData = new FormData();
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(resetForm());
   }, []);
+
+  // const submitUpdateBook = (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     title: title,
+  //     url_video: urlVideo,
+  //     category_id: parseInt(categoryID),
+  //   };
+
+  //   formData.append("file", file);
+
+  //   if (title || urlVideo || categoryID) {
+  //     dispatch(updateBook(bookID, data, history));
+  //   }
+  //   if (file) {
+  //     dispatch(updateBookFile(bookID, formData, history));
+  //   }
+  // };
 
   const submitUpdateBook = (e) => {
     e.preventDefault();
-    const data = {
-      title: title,
-      url_video: urlVideo,
-      category_id: parseInt(categoryID),
-    };
-
-    formData.append("file", file);
-
-    dispatch(updateBook(bookID, data));
-    if (formData) {
-      dispatch(updateBookFile(bookID, formData));
+    if (file) {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      fileRef.put(file).on("state_changed", (snaps) => {
+        const progress = Math.round(
+          (snaps.bytesTransferred / snaps.totalBytes) * 100
+        );
+        setFileProgress(progress);
+        setFileLoading(true);
+      });
+      fileRef.put(file).then((snapshot) => {
+        snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          const data = {
+            title: title,
+            url_video: urlVideo,
+            category_id: parseInt(categoryID),
+            url_file: downloadURL,
+          };
+          dispatch(updateBook(bookID, data, history));
+          setFileLoading(false);
+        });
+      });
     }
   };
 
@@ -54,7 +88,7 @@ function UpdateBook() {
         </div>
         <h3>Update Book</h3>
         <div className="container-fluid">
-          <div className="container d-flex flex-column justify-content-center align-items-center">
+          <div className="container d-flex flex-column justify-content-center align-items-center mb-3">
             <BookContentUpdate />
             <Form className="col-sm-6 mt-1" onSubmit={submitUpdateBook}>
               <Form.Group className="mb-3" controlId="formBasicName">
@@ -89,7 +123,7 @@ function UpdateBook() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formButton">
                 <select
-                  class="custom-select"
+                  className="custom-select"
                   id="inputGroupSelect01"
                   onClick={(e) => {
                     e.preventDefault();
@@ -117,9 +151,19 @@ function UpdateBook() {
                       : false
                   }
                 >
-                  {isLoading ? "Loading..." : "Update"}
+                  {fileLoading ? "Loading..." : "Update"}
                 </Button>
               </Form.Group>
+              {file && fileProgress !== 0 && fileProgress !== 100 && (
+                <ProgressBar
+                  animated
+                  now={fileProgress}
+                  label={`${fileProgress}%`}
+                />
+              )}
+              {fileProgress == 100 && (
+                <Alert variant="success">Update file succeed</Alert>
+              )}
             </Form>
           </div>
         </div>

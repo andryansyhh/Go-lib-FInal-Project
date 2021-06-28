@@ -51,7 +51,7 @@ const Register = () => {
               </div>
             </div>
             <div className="col-sm form-container">
-              <h1 className="title mb-4 mx-auto" >  Create Your Account  </h1>
+              <h1 className="title mb-4 mx-auto"> Create Your Account </h1>
               {error && <Alert variant="danger">{error}</Alert>}
               {success && <Alert variant="success">{success}</Alert>}
               {!success && (

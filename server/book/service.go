@@ -11,7 +11,8 @@ import (
 type BookService interface {
 	GetAllBook() ([]BookFormat, error)
 	GetBookByID(bookID string) (BookFormat, error)
-	SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error)
+	// SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error)
+	SaveNewBook(book entity.BookInput) (BookFormat, error)
 	UpdateBookByID(bookID string, dataInput entity.UpdateBookInput) (BookFormat, error)
 	UpdateFileByID(pathFile, bookID string) (BookFormat, error)
 	DeleteBookByID(bookID string) (interface{}, error)
@@ -66,12 +67,30 @@ func (s *bookService) GetBookByID(bookID string) (BookFormat, error) {
 	return formatBook, nil
 }
 
-func (s *bookService) SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error) {
+// func (s *bookService) SaveNewBook(title, urlVideo, urlFile string, categoryID int) (BookFormat, error) {
+// 	var newBook = entity.Books{
+// 		Title:      title,
+// 		CategoryID: categoryID,
+// 		UrlVideo:   urlVideo,
+// 		UrlFile: 		urlFile,
+// 	}
+
+// 	createBook, err := s.repository.NewBook(newBook)
+// 	formatBook := FormatBook(createBook)
+
+// 	if err != nil {
+// 		return formatBook, err
+// 	}
+
+// 	return formatBook, nil
+// }
+
+func (s *bookService) SaveNewBook(book entity.BookInput) (BookFormat, error) {
 	var newBook = entity.Books{
-		Title:      title,
-		CategoryID: categoryID,
-		UrlVideo:   urlVideo,
-		UrlFile: 		urlFile,
+		Title:      book.Title,
+		CategoryID: book.CategoryID,
+		UrlVideo:   book.UrlVideo,
+		UrlFile: 		book.UrlFile,
 	}
 
 	createBook, err := s.repository.NewBook(newBook)
@@ -112,6 +131,9 @@ func (s *bookService) UpdateBookByID(bookID string, dataInput entity.UpdateBookI
 	}
 	if dataInput.UrlVideo != "" || len(dataInput.UrlVideo) != 0 {
 		dataUpdate["url_video"] = dataInput.UrlVideo
+	}
+	if dataInput.UrlFile != "" || len(dataInput.UrlFile) != 0 {
+		dataUpdate["url_file"] = dataInput.UrlFile
 	}
 	dataUpdate["updated_at"] = time.Now()
 

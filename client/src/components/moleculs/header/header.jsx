@@ -58,7 +58,7 @@ const Header = () => {
 
                 {accessToken ? (
                   <>
-                    <div class="dropdown">
+                    <div className="dropdown">
                       <i
                         className="icon-nav nav-userlink text-dark"
                         type="button"
@@ -67,7 +67,7 @@ const Header = () => {
                         aria-expanded="false"
                       ></i>
                       <ul
-                        class="dropdown-menu"
+                        className="dropdown-menu"
                         aria-labelledby="dropdownMenuButton1"
                       >
                         <li>

@@ -2,6 +2,12 @@ import golibAPI from "../../../API/go-lib"
 
 const access_token = localStorage.getItem("accessToken")
 
+export const resetForm = () => {
+  return {
+    type: "ADMIN_RESET_FORM",
+  };
+}
+
 export const fetchBooks = () => {
   return async (dispatch) => {
     try {
@@ -57,11 +63,6 @@ export const createBook = (payload, history) => {
         headers: {
           "Authorization": access_token,
         },
-        onUploadProgress: progress => {
-          const { loaded, total } = progress
-          let percent = Math.floor((loaded * 100) / total)
-          dispatch({ type: "PROGRESS_UPLOAD", payload: percent })
-        }
       })
       // console.log(data)
       history.push("/admin/books")
@@ -72,10 +73,9 @@ export const createBook = (payload, history) => {
       console.log(err.response)
     }
   }
-
 }
 
-export const updateBook = (id, payload) => {
+export const updateBook = (id, payload, history) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_BOOK_LOADING" })
@@ -86,11 +86,16 @@ export const updateBook = (id, payload) => {
         data: payload,
         headers: {
           "Authorization": access_token
+        },
+        onUploadProgress: progress => {
+          const { loaded, total } = progress
+          let percent = Math.floor((loaded * 100) / total)
+          dispatch({ type: "PROGRESS_UPLOAD", payload: percent })
         }
       })
 
       // console.log(data)
-
+      history.push("/admin/books/edit/" + id)
       return dispatch({ type: "UPDATE_BOOK", payload: data })
 
     } catch (err) {
@@ -100,7 +105,7 @@ export const updateBook = (id, payload) => {
   }
 }
 
-export const updateBookFile = (id, payload) => {
+export const updateBookFile = (id, payload, history) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "ADMIN_BOOK_LOADING" })
@@ -111,11 +116,11 @@ export const updateBookFile = (id, payload) => {
         data: payload,
         headers: {
           "Authorization": access_token
-        }
+        },
       })
 
       // console.log(data)
-
+      history.push("/admin/books/edit/" + id)
       return dispatch({ type: "UPDATE_BOOK", payload: data })
 
     } catch (err) {
