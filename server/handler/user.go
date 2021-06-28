@@ -149,6 +149,6 @@ func (h *userHandler) LoginUserHandler(c *gin.Context) {
 		c.JSON(401, responseError)
 		return
 	}
-	response := helper.APINewResponse(200, "Login user succeed", gin.H{"token": token, "role": userData.Role})
+	response := helper.APINewResponse(200, "Login user succeed", gin.H{"token": token, "role": userData.Role, "user_id": userData.ID})
 	c.JSON(200, response)
 }
