@@ -9,6 +9,8 @@ const initState = {
 
 const adminBookReducer = (state = initState, action) => {
   switch (action.type) {
+    case "ADMIN_RESET_FORM":
+      return { ...initState, };
     case "ADMIN_BOOK_LOADING":
       return { ...state, isLoading: true }
     case "FETCH_BOOKS":

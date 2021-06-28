@@ -51,7 +51,7 @@ const Register = () => {
               </div>
             </div>
             <div className="col-sm form-container">
-              {error && <Alert variant="danger">{error}</Alert>}
+              {!success && error && <Alert variant="danger">{error}</Alert>}
               {success && <Alert variant="success">{success}</Alert>}
               {!success && (
                 <Form className="" onSubmit={registerSubmit}>

@@ -68,7 +68,6 @@ func (h *bookHandler) ShowBookDetailByID(c *gin.Context) {
 // 	}
 
 func (h *bookHandler) CreateBookHandler(c *gin.Context) {
-	// var bookInput entity.BookInput
 	title := c.PostForm("title")
 	urlVideo := c.PostForm("url_video")
 	categoryID := c.PostForm("category_id")

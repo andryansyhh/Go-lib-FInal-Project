@@ -15,7 +15,7 @@ const SearchMenu = ({ searching, searchBy }) => {
             style={{ borderRadius: "10px" }}
             onChange={searching}
           />
-          <InputGroup.Append>
+          {/* <InputGroup.Append>
             <Button
               variant="primary"
               className="ml-3"
@@ -24,7 +24,7 @@ const SearchMenu = ({ searching, searchBy }) => {
             >
               <img src={searchIcon} alt="search" style={{ width: "50%" }} />
             </Button>
-          </InputGroup.Append>
+          </InputGroup.Append> */}
         </InputGroup>
       </div>
     </>
