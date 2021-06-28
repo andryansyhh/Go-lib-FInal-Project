@@ -22,10 +22,12 @@ import OnlyPublicRoute from "./components/routes/OnlyPublicRoute";
 import DetailFile from "./components/moleculs/pages/DetailFile";
 import AllCategori from "./components/moleculs/pages/Allcategory";
 import Update from "./components/moleculs/pages/profileuser";
+import Darkmode from "./components/atom/Darkmode";
 
 function App() {
   return (
     <div className="App position-relative">
+      {/* <Darkmode/> */}
       <Router>
         <Switch>
           <PrivateRoute path="/home" exact component={HomePage} />

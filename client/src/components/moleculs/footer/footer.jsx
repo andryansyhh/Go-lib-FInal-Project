@@ -52,7 +52,7 @@ const Footer = () => {
         </div>
         {/* footer bottom */}
         <div>
-          <div className="containe pb-3">
+          <div className="container pb-3 footer-2">
             <div className="row justify-content-center footer">
               Copyright ©2021 Go-lib Team
             </div>
