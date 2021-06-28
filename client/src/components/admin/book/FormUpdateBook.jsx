@@ -123,7 +123,7 @@ function UpdateBook() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formButton">
                 <select
-                  class="custom-select"
+                  className="custom-select"
                   id="inputGroupSelect01"
                   onClick={(e) => {
                     e.preventDefault();

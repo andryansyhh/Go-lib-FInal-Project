@@ -6,6 +6,7 @@ import { logoutUser } from "../../../redux/user/userAction";
 import logo from "../../../assets/logo.png";
 import styled from "styled-components";
 import profile from "../../../assets/profile.svg";
+import Darkmode from "../../atom/Darkmode";
 
 const Header = () => {
   const NewHeader = styled.div``;
@@ -42,7 +43,7 @@ const Header = () => {
               className="collapse navbar-collapse justify-content-end"
               id="navbarNav"
             >
-              <ul className="navbar-nav">
+              <ul className="navbar-nav navtext">
                 <li>
                   <Link
                     onClick={() => {
@@ -57,7 +58,7 @@ const Header = () => {
 
                 {accessToken ? (
                   <>
-                    <div className="dropdown ml-3">
+                    <div className="dropdown">
                       <i
                         className="icon-nav nav-userlink"
                         type="button"
@@ -94,6 +95,9 @@ const Header = () => {
                             Logout
                           </Link>
                         </li>
+                        <li>
+                          <Darkmode />
+                        </li>
                       </ul>
                     </div>
                   </>
@@ -120,6 +124,9 @@ const Header = () => {
                       >
                         Register
                       </Link>
+                    </li>
+                    <li>
+                      <Darkmode />
                     </li>
                   </>
                 )}
