@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/user/userAction";
 import logo from "../../../assets/logo.png";
 import styled from "styled-components";
+import profile from "../../../assets/profile.svg";
 
 const Header = () => {
   const NewHeader = styled.div``;
@@ -53,20 +54,49 @@ const Header = () => {
                     News
                   </Link>
                 </li>
+
                 {accessToken ? (
-                  <li>
-                    <Link
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(logoutUser());
-                        history.push("/login");
-                      }}
-                      className="nav-link active"
-                      aria-current="page"
-                    >
-                      Logout
-                    </Link>
-                  </li>
+                  <>
+                    <div className="dropdown ml-3">
+                      <i
+                        className="icon-nav nav-userlink"
+                        type="button"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      ></i>
+                      <ul
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton1"
+                      >
+                        <li>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              history.push("/profile");
+                            }}
+                            className="nav-link active"
+                            aria-current="page"
+                          >
+                            Profile
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              dispatch(logoutUser());
+                              history.push("/login");
+                            }}
+                            className="nav-link active"
+                            aria-current="page"
+                          >
+                            Logout
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
                 ) : (
                   <>
                     <li>

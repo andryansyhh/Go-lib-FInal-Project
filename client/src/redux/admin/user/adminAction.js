@@ -96,6 +96,7 @@ export const updateUser = (id, payload) => {
 
       // console.log(data)
 
+      dispatch({ type: "SUCCESS_USERS", payload: "Update Success" })
       return dispatch({ type: "UPDATE_USER", payload: data })
 
     } catch (err) {

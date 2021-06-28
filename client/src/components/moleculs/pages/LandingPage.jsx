@@ -62,7 +62,7 @@ function LandingPage() {
                     history.push("/login");
                   }}
                   type="button"
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                 >
                   Go to Home Page
                 </button>

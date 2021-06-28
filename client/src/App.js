@@ -32,7 +32,7 @@ function App() {
           <PrivateRoute path="/categories/:id" exact component={DetailCategoriPage} />
           <PrivateRoute path="/files/:id" exact component={DetailFile} />
           <PrivateRoute path="/categories" exact component={AllCategori} />
-          <PrivateRoute path="/updateprofile" exact component={Update} />
+          <PrivateRoute path="/profile" exact component={Update} />
           <AdminRoute path="/admin/users" exact component={UserDashboard} />
           <AdminRoute path="/admin/users/add" component={CreateUserPage} />
           <AdminRoute path="/admin/users/edit/:id" exact component={UpdateUserPage} />
