@@ -11,7 +11,7 @@ import (
 func main() {
 
 	r := gin.Default()
-	r.Static("/file", "./file")
+	// r.Static("/file", "./file")
 	r.Use(handler.CorsMiddleware())
 
 	routes.UserRoute(r)
