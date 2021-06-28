@@ -11,6 +11,7 @@ import {
   updateBookFile,
 } from "../../../redux/admin/book/adminBookAction";
 import BookContentUpdate from "./BookContentUpdate";
+import { storage } from "../../../config";
 
 function UpdateBook() {
   const history = useHistory();
@@ -20,33 +21,62 @@ function UpdateBook() {
   const [urlVideo, setUrlVideo] = useState("");
   const [categoryID, setCategoryID] = useState(0);
   const [file, setFile] = useState("");
-  const { isLoading, fileProgress } = useSelector((state) => state.adminBook);
+  const [fileProgress, setFileProgress] = useState(0);
+  const [fileLoading, setFileLoading] = useState(false);
+  const { isLoading } = useSelector((state) => state.adminBook);
   const { categories } = useSelector((state) => state.adminCategory);
   const bookID = location.pathname.substr(
     location.pathname.lastIndexOf("/") + 1
   );
-  const formData = new FormData();
+  // const formData = new FormData();
 
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(resetForm());
   }, []);
 
+  // const submitUpdateBook = (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     title: title,
+  //     url_video: urlVideo,
+  //     category_id: parseInt(categoryID),
+  //   };
+
+  //   formData.append("file", file);
+
+  //   if (title || urlVideo || categoryID) {
+  //     dispatch(updateBook(bookID, data, history));
+  //   }
+  //   if (file) {
+  //     dispatch(updateBookFile(bookID, formData, history));
+  //   }
+  // };
+
   const submitUpdateBook = (e) => {
     e.preventDefault();
-    const data = {
-      title: title,
-      url_video: urlVideo,
-      category_id: parseInt(categoryID),
-    };
-
-    formData.append("file", file);
-
-    if (title || urlVideo || categoryID) {
-      dispatch(updateBook(bookID, data, history));
-    }
     if (file) {
-      dispatch(updateBookFile(bookID, formData, history));
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      fileRef.put(file).on("state_changed", (snaps) => {
+        const progress = Math.round(
+          (snaps.bytesTransferred / snaps.totalBytes) * 100
+        );
+        setFileProgress(progress);
+        setFileLoading(true);
+      });
+      fileRef.put(file).then((snapshot) => {
+        snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          const data = {
+            title: title,
+            url_video: urlVideo,
+            category_id: parseInt(categoryID),
+            url_file: downloadURL,
+          };
+          dispatch(updateBook(bookID, data, history));
+          setFileLoading(false);
+        });
+      });
     }
   };
 
@@ -93,7 +123,7 @@ function UpdateBook() {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formButton">
                 <select
-                  className="custom-select"
+                  class="custom-select"
                   id="inputGroupSelect01"
                   onClick={(e) => {
                     e.preventDefault();
@@ -121,7 +151,7 @@ function UpdateBook() {
                       : false
                   }
                 >
-                  {isLoading ? "Loading..." : "Update"}
+                  {fileLoading ? "Loading..." : "Update"}
                 </Button>
               </Form.Group>
               {file && fileProgress !== 0 && fileProgress !== 100 && (

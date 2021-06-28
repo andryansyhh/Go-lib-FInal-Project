@@ -63,11 +63,6 @@ export const createBook = (payload, history) => {
         headers: {
           "Authorization": access_token,
         },
-        onUploadProgress: progress => {
-          const { loaded, total } = progress
-          let percent = Math.floor((loaded * 100) / total)
-          dispatch({ type: "PROGRESS_UPLOAD", payload: percent })
-        }
       })
       // console.log(data)
       history.push("/admin/books")
@@ -78,7 +73,6 @@ export const createBook = (payload, history) => {
       console.log(err.response)
     }
   }
-
 }
 
 export const updateBook = (id, payload, history) => {
@@ -123,11 +117,6 @@ export const updateBookFile = (id, payload, history) => {
         headers: {
           "Authorization": access_token
         },
-        onUploadProgress: progress => {
-          const { loaded, total } = progress
-          let percent = Math.floor((loaded * 100) / total)
-          dispatch({ type: "PROGRESS_UPLOAD", payload: percent })
-        }
       })
 
       // console.log(data)

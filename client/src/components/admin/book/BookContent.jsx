@@ -91,7 +91,14 @@ const BookContent = () => {
                               : currentPage + index + usersPerPage - 1}
                           </td>
                           <td>{data.title}</td>
-                          <td>{data.url_file}</td>
+                          <td
+                            style={{
+                              maxWidth: "200px",
+                              wordWrap: "break-word",
+                            }}
+                          >
+                            {data.url_file}
+                          </td>
                           <td
                             style={{
                               maxWidth: "150px",
@@ -168,7 +175,14 @@ const BookContent = () => {
                             : currentPage + index + usersPerPage - 1}
                         </td>
                         <td>{data.title}</td>
-                        <td>{data.url_file}</td>
+                        <td
+                          style={{
+                            maxWidth: "150px",
+                            wordWrap: "break-word",
+                          }}
+                        >
+                          {data.url_file}
+                        </td>
                         <td
                           style={{
                             maxWidth: "150px",

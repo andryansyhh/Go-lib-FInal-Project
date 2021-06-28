@@ -44,6 +44,9 @@ const DetailCategoriPage = () => {
   };
 
   const NewCard = styled.div`
+    max-width: 200px;
+    min-height: 210px;
+    text-align: center;
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
@@ -128,7 +131,8 @@ const DetailCategoriPage = () => {
                               variant="top"
                               src="https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png"
                               style={{
-                                minHeight: "150px",
+                                maxHeight: "150px",
+                                maxWidth: "120px",
                               }}
                             />
                             <Card.Body
@@ -173,7 +177,8 @@ const DetailCategoriPage = () => {
                             variant="top"
                             src="https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png"
                             style={{
-                              minHeight: "150px",
+                              maxHeight: "150px",
+                              maxWidth: "120px",
                             }}
                           />
                           <Card.Body

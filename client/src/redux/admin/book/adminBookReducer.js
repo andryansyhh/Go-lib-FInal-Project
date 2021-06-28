@@ -3,8 +3,8 @@ const initState = {
   book: null,
   isLoading: false,
   error: null,
-  fileProgress: 0,
   lengthBooks: 0,
+  urlFile: "",
 }
 
 const adminBookReducer = (state = initState, action) => {
@@ -19,8 +19,6 @@ const adminBookReducer = (state = initState, action) => {
       return { ...state, isLoading: false, book: action.payload }
     case "CREATE_BOOK":
       return { ...state, isLoading: false, book: action.payload }
-    case "PROGRESS_UPLOAD":
-      return { ...state, fileProgress: action.payload }
     case "UPDATE_BOOK":
       return { ...state, isLoading: false, book: action.payload }
     case "DELETE_BOOK":
@@ -29,6 +27,8 @@ const adminBookReducer = (state = initState, action) => {
       return { ...state, isLoading: false, error: action.payload }
     case "LENGTH_BOOKS":
       return { ...state, isLoading: false, lengthBooks: action.payload }
+    case "UPLOAD_FILE":
+      return { ...state, isLoading: false, urlFile: action.payload }
     default:
       return state
   }
