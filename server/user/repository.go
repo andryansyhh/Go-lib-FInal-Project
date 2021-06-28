@@ -62,7 +62,7 @@ func (r *repository) DeleteByID(ID string) (string, error) {
 func (r *repository) UpdateByID(ID string, dataUpdate map[string]interface{}) (entity.User, error) {
 
 	var user entity.User
-
+	
 	if err := r.db.Model(&user).Where("id = ?", ID).Updates(dataUpdate).Error; err != nil {
 		return user, err
 	}

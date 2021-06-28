@@ -30,6 +30,7 @@ const Login = () => {
       password: pass,
     };
     dispatch(loginUser(data, history));
+
   };
 
   return (
