@@ -2,7 +2,8 @@ const initState = {
   users: [],
   user: null,
   isLoading: false,
-  error: null
+  error: null,
+  success: null
 }
 
 const adminReducer = (state = initState, action) => {
@@ -21,6 +22,8 @@ const adminReducer = (state = initState, action) => {
       return { ...state, isLoading: false, user: null }
     case "ERROR_USERS":
       return { ...state, isLoading: false, error: action.payload }
+    case "SUCCESS_USERS":
+      return { ...state, isLoading: false, success: action.payload }
     default:
       return state
   }

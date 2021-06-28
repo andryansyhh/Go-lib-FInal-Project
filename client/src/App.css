@@ -31,6 +31,26 @@ h6 {
   justify-content: center;
 }
 
+.icon-nav::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav-userlink::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f2bd";
+  font-size: x-large;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
 .section2-container {
   background-color: #f0f0f0 !important;
 }
@@ -45,6 +65,11 @@ h6 {
   font-weight: 700 !important;
 }
 
+/* .useredit-cardheader::after {
+  content: ":";
+  margin-left: 5vw;
+} */
+
 .content-container {
   margin-top: 25px;
   margin-bottom: 50px;
@@ -56,6 +81,14 @@ h6 {
 
 .footer-container {
   background-color: #f0f0f0 !important;
+}
+
+a{
+  color: #343a40 !important;
+}
+a:hover{
+  color:#007bff !important;
+  text-decoration: none !important;
 }
 
 .footer-1,

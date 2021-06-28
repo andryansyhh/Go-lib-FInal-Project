@@ -41,15 +41,14 @@ const Update = () => {
             password: confirm,
         };
 
-        checkPass();
-        if (errorPass === false) {
+        if (pass === confirm) {
             dispatch(updateUser(userId, data));
-        }
-
+            clearPass()
+        } else (setErrorPass(true))
     };
 
-    const checkPass = () => {
-        if (pass !== confirm) { setErrorPass(true) }
+    const clearPass = () => {
+        document.getElementById("clear").reset()
     }
 
     return (
@@ -57,117 +56,151 @@ const Update = () => {
             <Header />
             <div className="container-fluid page-container">
                 <div className="container">
-                    <div className="row justify-content-center align-items-center">
+                    <div className="row justify-content-center align-items-start">
                         <div className="col-sm">
                             <div className="img-container">
                                 {isLoading ? (
                                     <Loading />
                                 ) : (
                                     <div className="mt-3" id="page-content-wrapper">
-                                        <div className="col-sm-4 d-flex justify-content-center mx-auto">
-                                            <Table responsive="sm">
-                                                {user && (
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>Full Name</th>
-                                                            <td>{user.data.name}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>User Name</th>
-                                                            <td>{user.data.user_name}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Email</th>
-                                                            <td>{user.data.email}</td>
-                                                        </tr>
-                                                    </tbody>
+                                        <div className="col-sm d-flex justify-content-start me-4">
+                                            <div class="card h-100" style={{ minWidth: "25vw", borderRadius: "10px", minHeight: "39vh" }}>
+                                                <div class="card-body">{user && (
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <h2 className="title mb-4 mx-auto" > Your Profile </h2>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div className="row">
+                                                                <div className="col-sm d-flex align-items-center">
+                                                                    <h4 className="">
+                                                                        Full Name :
+                                                                    </h4>
+                                                                </div>
+                                                                <div className="col-sm d-flex align-items-center justify-content-end">
+                                                                    <h4 className="title text-end">
+                                                                        {user.data.name}
+                                                                    </h4>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div className="row">
+                                                                <div className="col-sm d-flex align-items-center">
+                                                                    <h4 className="">
+                                                                        Username :
+                                                                    </h4>
+                                                                </div>
+                                                                <div className="col-sm d-flex align-items-center justify-content-end">
+                                                                    <h4 className="title text-end">
+                                                                        {user.data.user_name}
+                                                                    </h4>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <div className="row">
+                                                                <div className="col-sm d-flex align-items-center">
+                                                                    <h4 className="">
+                                                                        Email :
+                                                                    </h4>
+                                                                </div>
+                                                                <div className="col-sm d-flex align-items-center justify-content-end">
+                                                                    <h4 className="title text-end">
+                                                                        {user.data.email}
+                                                                    </h4>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 )}
-                                            </Table>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 )}
                             </div>
                         </div>
                         <div className="col-sm form-container">
+                            <h1 className="title mb-4 mx-auto" >  Update Your Profile  </h1>
                             {error && <Alert variant="danger">{error}</Alert>}
                             {success && <Alert variant="success">{success}</Alert>}
-                            {!success && (
-                                <Form className="" onSubmit={updateSubmit}>
-                                    <Form.Group className="" controlId="formBasicEmail">
-                                        <Form.Control
-                                            type="fullname"
-                                            placeholder="Full Name"
+                            <Form className="" id="clear" onSubmit={updateSubmit}>
+                                <Form.Group className="" controlId="formBasicEmail">
+                                    <Form.Control
+                                        type="fullname"
+                                        placeholder="Full Name"
 
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setName(e.target.value);
-                                            }}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="" controlId="formBasicEmail">
-                                        <Form.Control
-                                            type="name"
-                                            placeholder="User Name"
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            setName(e.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="" controlId="formBasicEmail">
+                                    <Form.Control
+                                        type="name"
+                                        placeholder="User Name"
 
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setUserName(e.target.value);
-                                            }}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="" controlId="formBasicEmail">
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="Email"
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            setUserName(e.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="" controlId="formBasicEmail">
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Email"
 
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setEmail(e.target.value);
-                                            }}
-                                        />
-                                        <Form.Text className="text-muted"></Form.Text>
-                                    </Form.Group>
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            setEmail(e.target.value);
+                                        }}
+                                    />
+                                    <Form.Text className="text-muted"></Form.Text>
+                                </Form.Group>
 
-                                    <Form.Group className="" controlId="formBasicPassword">
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="New Password"
-                                            autoComplete="new-password"
+                                <Form.Group className="" controlId="formBasicPassword">
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="New Password"
+                                        autoComplete="new-password"
 
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setPass(e.target.value);
-                                            }}
-                                        />
-                                    </Form.Group>
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            setPass(e.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
 
-                                    <Form.Group className="" controlId="formBasicPassword">
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Confirm Password"
-                                            autoComplete="new-password"
+                                <Form.Group className="" controlId="formBasicPassword">
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        autoComplete="new-password"
 
-                                            onChange={(e) => {
-                                                e.preventDefault();
-                                                setConfirm(e.target.value);
-                                            }}
-                                        />
-                                    </Form.Group>
-                                    {errorPass && (
-                                        <Alert variant="danger">
-                                            Password not match
-                                        </Alert>
-                                    )}
-                                    <Form.Group className="" controlId="formButton">
-                                        <Form.Control
-                                            className="btn btn-primary"
-                                            type="submit"
-                                            value={isLoading ? "Loading..." : "Save Change"}
-                                            disabled={isLoading ? true : false}
-                                        />
-                                    </Form.Group>
-                                </Form>
-                            )}
+                                        onChange={(e) => {
+                                            e.preventDefault();
+                                            setConfirm(e.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+                                {errorPass && !success && (
+                                    <Alert variant="danger">
+                                        Password not match
+                                    </Alert>
+                                )}
+                                <Form.Group className="" controlId="formButton">
+                                    <Form.Control
+                                        className="btn btn-primary"
+                                        type="submit"
+                                        value={isLoading ? "Loading..." : "Save Change"}
+                                        disabled={isLoading ? true : false}
+                                    />
+                                </Form.Group>
+                            </Form>
                         </div>
                     </div>
                     {/* <GoogleButton /> */}
