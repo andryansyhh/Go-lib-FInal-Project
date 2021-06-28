@@ -48,6 +48,7 @@ export const loginUser = (payload, history) => {
             })
 
             localStorage.setItem("accessToken", data.data.token)
+            localStorage.setItem("userId", data.data.user_id)
 
             // console.log(data)
             if (data.data.role === "admin") {
