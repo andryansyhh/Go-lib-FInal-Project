@@ -6,6 +6,7 @@ import { logoutUser } from "../../../redux/user/userAction";
 import logo from "../../../assets/logo.png";
 import styled from "styled-components";
 import profile from "../../../assets/profile.svg";
+import Darkmode from "../../atom/Darkmode";
 
 const Header = () => {
   const NewHeader = styled.div``;
@@ -15,7 +16,7 @@ const Header = () => {
   return (
     <>
       <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg navbar-light bg-white">
+        <nav className="navbar navbar-expand-lg">
           <div className="container">
             <div
               onClick={() => {
@@ -58,9 +59,17 @@ const Header = () => {
                 {accessToken ? (
                   <>
                     <div class="dropdown">
-                      <i className="icon-nav nav-userlink" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      </i>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <i
+                        className="icon-nav nav-userlink"
+                        type="button"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      ></i>
+                      <ul
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton1"
+                      >
                         <li>
                           <Link
                             onClick={(e) => {
@@ -71,7 +80,6 @@ const Header = () => {
                             aria-current="page"
                           >
                             Profile
-
                           </Link>
                         </li>
                         <li>
@@ -87,10 +95,11 @@ const Header = () => {
                             Logout
                           </Link>
                         </li>
-
+                        <li>
+                          <Darkmode />
+                        </li>
                       </ul>
                     </div>
-
                   </>
                 ) : (
                   <>
@@ -116,7 +125,9 @@ const Header = () => {
                         Register
                       </Link>
                     </li>
-
+                    <li>
+                      <Darkmode />
+                    </li>
                   </>
                 )}
               </ul>
