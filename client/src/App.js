@@ -21,6 +21,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import OnlyPublicRoute from "./components/routes/OnlyPublicRoute";
 import DetailFile from "./components/moleculs/pages/DetailFile";
 import AllCategori from "./components/moleculs/pages/Allcategory";
+import Update from "./components/moleculs/pages/profileuser";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <PrivateRoute path="/categories/:id" exact component={DetailCategoriPage} />
           <PrivateRoute path="/files/:id" exact component={DetailFile} />
           <PrivateRoute path="/categories" exact component={AllCategori} />
+          <PrivateRoute path="/updateprofile" exact component={Update} />
           <AdminRoute path="/admin/users" exact component={UserDashboard} />
           <AdminRoute path="/admin/users/add" component={CreateUserPage} />
           <AdminRoute path="/admin/users/edit/:id" exact component={UpdateUserPage} />

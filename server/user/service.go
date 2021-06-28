@@ -154,6 +154,11 @@ func (s *service) DeleteUserByID(userID string) (interface{}, error) {
 //(UserFormat, error)
 
 func (s *service) UpdateUserByID(userID string, dataInput entity.UpdateUserInput) (UserFormat, error) {
+	genPassword, err := bcrypt.GenerateFromPassword([]byte(dataInput.Password), bcrypt.MinCost)
+
+	if err != nil {
+		return UserFormat{}, err
+	}
 	var dataUpdate = map[string]interface{}{}
 
 	if err := helper.ValidateIDNumber(userID); err != nil {
@@ -180,7 +185,9 @@ func (s *service) UpdateUserByID(userID string, dataInput entity.UpdateUserInput
 	if dataInput.UserName != "" || len(dataInput.UserName) != 0 {
 		dataUpdate["user_name"] = dataInput.UserName
 	}
-
+	if dataInput.Password != "" || len(dataInput.Password) != 0 {
+		dataUpdate["password"] = genPassword
+	}
 	dataUpdate["updated_at"] = time.Now()
 
 	// fmt.Println(dataUpdate)
