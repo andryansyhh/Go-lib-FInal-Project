@@ -66,6 +66,7 @@ const DetailFile = () => {
                     allowFullScreen
                     title="file"
                     // src={`//docs.google.com/gview?url=${book.data.url_file}&embedded=true`}
+                    // src={`https://docs.google.com/viewer?url=${book.data.url_file}&embedded=true`}
                     src={book.data.url_file}
                   />
                 </div>

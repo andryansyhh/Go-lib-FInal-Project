@@ -58,7 +58,7 @@ const Header = () => {
 
                 {accessToken ? (
                   <>
-                    <div className="dropdown">
+                    <div className="dropdown ml-3">
                       <i
                         className="icon-nav nav-userlink text-dark"
                         type="button"
