@@ -143,3 +143,9 @@ a:hover {
     text-align: center;
   }
 }
+
+@media (max-width: 768px) {
+  .quote {
+    font-size: 1.5rem;
+  }
+}

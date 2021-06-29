@@ -51,7 +51,7 @@ function LandingPage() {
           <div className="row align-items-center mt-5">
             <div className="col-sm">
               <div className="row">
-                <h1>
+                <h1 className="quote">
                   “No matter how busy you may think you are, you must find time
                   for reading, or surrender yourself to self-chosen ignorance.”
                 </h1>
