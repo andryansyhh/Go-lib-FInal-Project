@@ -72,7 +72,7 @@ const AllCategori = () => {
                     </div> */}
         </div>
         <div className="row justify-content-between">
-          <div className="col-3">
+          <div className="col-sm-3 btnback-container">
             <button
               className="btn btn-primary text-light"
               onClick={() => {
@@ -82,7 +82,7 @@ const AllCategori = () => {
               Back to Home
             </button>
           </div>
-          <div className="col-3">
+          <div className="col-sm-3">
             <form action="">
               <div className="form-row">
                 <div className="col-10">
@@ -95,7 +95,7 @@ const AllCategori = () => {
                     onChange={searching}
                   />
                 </div>
-                <div className="col-2">
+                <div className="col btnsrc-container">
                   <button className="btn btn-primary">
                     <li className="fa fa-search text-white"></li>
                   </button>
