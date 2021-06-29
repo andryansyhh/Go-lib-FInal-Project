@@ -142,4 +142,12 @@ a:hover {
   .footer-container {
     text-align: center;
   }
+
+  .landing-text {
+    font-size: 1rem;
+  }
+
+  .unique {
+    margin-bottom: 2em;
+  }
 }

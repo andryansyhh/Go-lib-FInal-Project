@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c5b839fc.chunk.css",
+    "main.js": "/static/js/main.ebc14aa5.chunk.js",
+    "main.js.map": "/static/js/main.ebc14aa5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cc85cbe0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cc85cbe0.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.16a94e73.chunk.js": "/static/js/2.16a94e73.chunk.js",
+    "static/js/2.16a94e73.chunk.js.map": "/static/js/2.16a94e73.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.c5b839fc.chunk.css.map": "/static/css/main.c5b839fc.chunk.css.map",
+    "static/js/2.16a94e73.chunk.js.LICENSE.txt": "/static/js/2.16a94e73.chunk.js.LICENSE.txt",
+    "static/media/Code-typing-bro.8a639656.svg": "/static/media/Code-typing-bro.8a639656.svg",
+    "static/media/Learning-bro.bbfe6856.svg": "/static/media/Learning-bro.bbfe6856.svg",
+    "static/media/Login-amico.5170cf65.svg": "/static/media/Login-amico.5170cf65.svg",
+    "static/media/Mobile-login-pana.273b7b66.svg": "/static/media/Mobile-login-pana.273b7b66.svg",
+    "static/media/file.da7c06a2.png": "/static/media/file.da7c06a2.png",
+    "static/media/folder.be84159f.svg": "/static/media/folder.be84159f.svg",
+    "static/media/logo.94b0fc8d.png": "/static/media/logo.94b0fc8d.png",
+    "static/media/Darkmode.css": "/static/media/moon.08c8560a.png",
+    "static/media/noimage.ed4a2a56.png": "/static/media/noimage.ed4a2a56.png",
+    "static/media/profile.da970b88.svg": "/static/media/profile.da970b88.svg",
+    "static/media/search-icon.87e5c9f1.svg": "/static/media/search-icon.87e5c9f1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cc85cbe0.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.16a94e73.chunk.js",
+    "static/css/main.c5b839fc.chunk.css",
+    "static/js/main.ebc14aa5.chunk.js"
+  ]
+}
