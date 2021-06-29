@@ -51,7 +51,7 @@ function LandingPage() {
           <div className="row align-items-center mt-5">
             <div className="col-sm">
               <div className="row">
-                <h1 className="quote">
+                <h1 className="landing-text">
                   “No matter how busy you may think you are, you must find time
                   for reading, or surrender yourself to self-chosen ignorance.”
                 </h1>
@@ -88,7 +88,7 @@ function LandingPage() {
           ) : (
             <div className="row ">
               {length.data && (
-                <div className="col-sm text-center">
+                <div className="col-sm text-center unique">
                   <img src={category} alt="" width="100px" className="mb-3" />{" "}
                   <br />
                   <h5>{length.data}+ Categories</h5>
@@ -127,7 +127,7 @@ function LandingPage() {
                           .slice(0, 4)
                           .map((data, index) => {
                             return (
-                              <div className="col-6 col-md-4 col-xl-3 mb-3">
+                              <div className="col-12 col-md-4 col-xl-3 mb-3">
                                 <NewCard key={index}>
                                   <a
                                     href={data.url}

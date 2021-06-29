@@ -60,7 +60,7 @@ const Header = () => {
                   <>
                     <div className="dropdown ml-3">
                       <i
-                        className="icon-nav nav-userlink"
+                        className="icon-nav nav-userlink text-dark"
                         type="button"
                         id="dropdownMenuButton1"
                         data-bs-toggle="dropdown"
