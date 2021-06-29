@@ -78,7 +78,7 @@ h6 {
   color: #343a40 !important;
 }
 
-.card-container {
+.c ard-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -149,5 +149,30 @@ a:hover {
 
   .unique {
     margin-bottom: 2em;
+  }
+
+  .edituser-card {
+    text-align: center;
+  }
+
+  .edituser-card .list-group-item {
+    text-align: center !important;
+  }
+
+  .form-container {
+    margin-top: 10vh;
+    text-align: center;
+  }
+
+  .btnback-container {
+    margin-bottom: 15px;
+  }
+
+  .btnback-container button {
+    width: 100%;
+  }
+
+  .btnsrc-container button {
+    width: 100%;
   }
 }

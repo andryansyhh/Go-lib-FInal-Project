@@ -68,7 +68,7 @@ const Update = () => {
                   <div className="mt-3" id="page-content-wrapper">
                     <div className="col-sm d-flex justify-content-start me-4">
                       <div
-                        className="card h-100"
+                        className="card edituser-card h-100"
                         style={{
                           minWidth: "25vw",
                           borderRadius: "10px",
@@ -90,9 +90,7 @@ const Update = () => {
                                     <h4 className="">Full Name :</h4>
                                   </div>
                                   <div className="col-sm d-flex align-items-center justify-content-end">
-                                    <h4 className="title text-end">
-                                      {user.data.name}
-                                    </h4>
+                                    <h4 className="title">{user.data.name}</h4>
                                   </div>
                                 </div>
                               </li>
@@ -102,7 +100,7 @@ const Update = () => {
                                     <h4 className="">Username :</h4>
                                   </div>
                                   <div className="col-sm d-flex align-items-center justify-content-end">
-                                    <h4 className="title text-end">
+                                    <h4 className="title ">
                                       {user.data.user_name}
                                     </h4>
                                   </div>
@@ -114,7 +112,7 @@ const Update = () => {
                                     <h4 className="">Email :</h4>
                                   </div>
                                   <div className="col-sm d-flex align-items-center justify-content-end">
-                                    <h4 className="title text-end">
+                                    <h4 className="title ">
                                       {user.data.email}
                                     </h4>
                                   </div>
