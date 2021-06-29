@@ -127,7 +127,7 @@ function LandingPage() {
                           .slice(0, 4)
                           .map((data, index) => {
                             return (
-                              <div className="col-6 col-md-4 col-xl-3 mb-3">
+                              <div className="col-12 col-md-4 col-xl-3 mb-3">
                                 <NewCard key={index}>
                                   <a
                                     href={data.url}
