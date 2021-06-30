@@ -95,7 +95,7 @@ const AllCategori = () => {
                     onChange={searching}
                   />
                 </div>
-                <div className="col btnsrc-container">
+                <div className="col-2 btnsrc-container">
                   <button className="btn btn-primary">
                     <li className="fa fa-search text-white"></li>
                   </button>
