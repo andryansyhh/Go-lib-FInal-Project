@@ -95,6 +95,7 @@ const DetailCategoriPage = () => {
                       className="form-control"
                       placeholder="Search File.."
                       onChange={searching}
+                      width="100wh"
                     />
                   </div>
                   <div className="col-2">
