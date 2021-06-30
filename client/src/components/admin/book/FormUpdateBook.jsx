@@ -77,6 +77,13 @@ function UpdateBook() {
           setFileLoading(false);
         });
       });
+    } else {
+      const data = {
+        title: title,
+        url_video: urlVideo,
+        category_id: parseInt(categoryID),
+      };
+      dispatch(updateBook(bookID, data, history));
     }
   };
 
